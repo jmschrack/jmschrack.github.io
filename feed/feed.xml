@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-	<title>Your Blog Name</title>
+	<title>JMSchrack Portfolio</title>
 	<subtitle>I am writing about my experiences as a naval navel-gazer.</subtitle>
 	
 	<link href="https://myurl.com/eleventy-portfolio/feed/feed.xml" rel="self"/>
@@ -8,8 +8,8 @@
 	<updated>2018-09-30T00:00:00-00:00</updated>
 	<id>https://myurl.com/</id>
 	<author>
-		<name>Your Name Here</name>
-		<email>youremailaddress@example.com</email>
+		<name>Jonathan Schrack</name>
+		<email>jonathan.schrack@digitalprecept.com</email>
 	</author>
 	
 	<entry>
