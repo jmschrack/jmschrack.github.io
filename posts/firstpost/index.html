@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Running eleventy on GitHub Pages for idiots.</title>
-    <meta name="Description" content="A step by step">
+    <title>An Idiot&#39;s Guide to running Eleventy on GitHub Pages.</title>
+    <meta name="Description" content="Written as if you know almost nothing about any of this tech.">
     <link rel="stylesheet" href="/eleventy-portfolio/css/index.css">
     <link rel="stylesheet" href="/eleventy-portfolio/css/prism-base16-monokai.dark.css">
     <link rel="alternate" href="/eleventy-portfolio/feed/feed.xml" type="application/atom+xml" title="JMSchrack Portfolio">
@@ -29,14 +29,18 @@
         <p><em>This is an <a href="https://www.11ty.io/">Eleventy project</a> created from the <a href="https://github.com/11ty/eleventy-base-blog"><code>eleventy-base-blog</code> repo</a>.</em></p>
       </div>
 
-      <h1>Running eleventy on GitHub Pages for idiots.</h1>
+      <h1>An Idiot&#39;s Guide to running Eleventy on GitHub Pages.</h1>
 
-<p>When it comes to text tutorials, I prefer the overly verbose tutorials. So I'm documenting my process of getting the Eleventy base blog.</p>
+<p>When it comes to text tutorials, I prefer them overly verbose. So I'm documenting my process of getting the Eleventy base blog for the next wandering programmer that might come by.<br>
+I've used Continuous Integation before, but never TravisCI. I've used git and GitHub before, but never GitHub pages. And of course, I've never used eleventy before now.<br>
+The whole point of SSG is to enable you to just focus on the content of your website, and not the infrastructure. However, if you haven't used all of these components, guess what you're wasting time trying to figure out?<br>
+So an &quot;Idiot's Guide&quot; is to enable anyone (not necessarily developers!) to do the bare minimum infrastructure set up in order to focus on the content.<br>
+The only assumption is that you know commit&amp;push to a git repo.</p>
 <h2 id="what-is-this%3F">What is this? <a class="direct-link" href="#what-is-this%3F">#</a></h2>
-<p>Eleventy is a &quot;Static Site Generator&quot; that lets you type of pages in simple markdown, and then generate all the html and CSS required.<br>
+<p>Eleventy is a &quot;Static Site Generator&quot; that lets you type up pages in simple markdown, and then it generates all the html and CSS required.<br>
 GitHub Pages will host static HTML websites based on a git repo.<br>
 TravisCI will auto pull your latest code, build it, and deploy for you.<br>
-All 3 of these together make for a straight forward website.</p>
+All 3 of these together make for a straight forward website pipeline.</p>
 <h2 id="get-node.js-(optional)">Get Node.js (Optional) <a class="direct-link" href="#get-node.js-(optional)">#</a></h2>
 <p>Eleventy uses JavaScript and runs on Node.js.  TravisCI will handle all of this for us, and so you don't have to install node.js yourself.<br>
 However, it's a good idea to do this so you can rapidly test changes on your local computer before pushing them live.</p>
@@ -47,17 +51,22 @@ However, it's a good idea to do this so you can rapidly test changes on your loc
 <li>Open up Windows Powershell (or command prompt).</li>
 <li>run &quot;npm install -g @11ty/eleventy&quot;  (without quotes)</li>
 <li>Go to <a href="https://github.com/11ty/eleventy-base-blog">https://github.com/11ty/eleventy-base-blog</a> and choose &quot;Use This Template&quot; button. Name your repo whatever you want, or leave the default name.</li>
+<li>On your freshly created/cloned GitHub repository, create a new branch called &quot;gh-pages&quot;. (You'll leave it blank for now.)</li>
+</ol>
+<h2 id="set-up-travisci-to-publish-your-github-repo">Set up TravisCI to publish your GitHub repo <a class="direct-link" href="#set-up-travisci-to-publish-your-github-repo">#</a></h2>
+<ol start="5">
 <li>Go to <a href="https://travis-ci.org/getting_started">https://travis-ci.org/getting_started</a> , sign in with github. If you're feeling lazy, just activate Travis for all repositories.</li>
-<li>On your GitHub repository, create a new branch called &quot;gh-pages&quot;.</li>
 <li>On GitHub, go to your profile Settings&gt;Developer Settings&gt;Personal Access Tokens, and create a new personal access token for TravisCI with the &quot;Repo&quot; permissions. <strong>Copy the key!</strong></li>
 <li>Go to TravisCI and navigate to your repository, and go to the settings for it. Create a new EnvironmentVariable called &quot;GITHUB_TOKEN&quot;, paste the Access Token you copied in here and click &quot;Add&quot;</li>
+</ol>
+<h2 id="publish-your-page-for-the-first-time">Publish your page for the first time <a class="direct-link" href="#publish-your-page-for-the-first-time">#</a></h2>
+<ol start="8">
 <li>Edit _data/metadata.json and replace some of the place holder data. We do this to do a fresh commit which will trigger our Travis build.</li>
 <li>(Optionally) If you changed the name of your repo, you will need to edit your .travis.yml and change the &quot;path prefix&quot; to match your repo name.</li>
 <li>Commit and push your changes now. Go back to TravisCI and watch your build begin.</li>
 <li>Once Travis finishes, go to your <a href="http://GitHub.com">GitHub.com</a> repo's settings, scroll down to find the &quot;GitHub Pages&quot; section. If everything worked, you'll be given a link!</li>
 </ol>
 <p>The first time, I got an &quot;Unknown Tag&quot; error. I don't know what caused it, but doing a second build on Jenkins fixed it.</p>
-<pre class="language-text"><code class="language-text"><span class="highlight-line">// this is a command</span><br><span class="highlight-line">function myCommand() {</span><br><mark class="highlight-line highlight-line-active">	let counter = 0;</mark><br><mark class="highlight-line highlight-line-active">	counter++;</mark><br><span class="highlight-line">}</span><br><span class="highlight-line"></span><br><span class="highlight-line">// Test with a line break above this line.</span><br><span class="highlight-line">console.log('Test');</span></code></pre>
 
 
 <p><a href="/eleventy-portfolio/">← Home</a></p>
