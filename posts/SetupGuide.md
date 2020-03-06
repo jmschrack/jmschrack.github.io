@@ -29,18 +29,39 @@ You can download an installer for Node.js from https://nodejs.org/en/download/. 
 1. Open up Windows Powershell (or command prompt).
 2. run "npm install -g @11ty/eleventy"  (without quotes)
 3. Go to https://github.com/11ty/eleventy-base-blog and choose "Use This Template" button. Name your repo whatever you want, or leave the default name.
-4. On your freshly created/cloned GitHub repository, create a new branch called "gh-pages". (You'll leave it blank for now.)
+4. On your freshly created/cloned GitHub repository, create a new branch called "dev" (Or whatever you want, all your work will be done here.)  If you want to set this up for a specific repo instead of your "User page", call the branch "gh-pages", and skip to step 6.
+5. On your github repo's settings, change the default branch to "dev" and rename your repo to _username_.github.io  
 
 ## Set up TravisCI to publish your GitHub repo
-5. Go to https://travis-ci.org/getting_started , sign in with github. If you're feeling lazy, just activate Travis for all repositories.
-6. On GitHub, go to your profile Settings>Developer Settings>Personal Access Tokens, and create a new personal access token for TravisCI with the "Repo" permissions. **Copy the key!**
-7. Go to TravisCI and navigate to your repository, and go to the settings for it. Create a new EnvironmentVariable called "GITHUB_TOKEN", paste the Access Token you copied in here and click "Add"
+6. Go to https://travis-ci.org/getting_started , sign in with github. If you're feeling lazy, just activate Travis for all repositories.
+7. On GitHub, go to your profile Settings>Developer Settings>Personal Access Tokens, and create a new personal access token for TravisCI with the "Repo" permissions. **Copy the key!**
+8. Go to TravisCI and navigate to your repository, and go to the settings for it. Create a new EnvironmentVariable called "GITHUB_TOKEN", paste the Access Token you copied in here and click "Add"
 
 ## Publish your page for the first time
-8. Edit \_data/metadata.json and replace some of the place holder data. We do this to do a fresh commit which will trigger our Travis build.
-9. (Optionally) If you changed the name of your repo, you will need to edit your .travis.yml and change the "path prefix" to match your repo name.
+9. If you are not using the User page (i.e. you skipped step 5 above), just change the "pathprefix" in .travis.yml to point to your repo's name. Otherwise, edit your .travis.yml and change it to the following.:
+
+```
+language: node_js
+node_js:
+  - 8
+before_script:
+  - npm install @11ty/eleventy -g
+script: eleventy --pathprefix="/"
+deploy:
+  local-dir: _site
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
+  keep-history: true
+  target_branch: master
+  on:
+    branch: dev
+```
+
+
+This tells TravisCI to pull from the dev branch, and deploy to the master branch. 
 10. Commit and push your changes now. Go back to TravisCI and watch your build begin. 
-11. Once Travis finishes, go to your GitHub.com repo's settings, scroll down to find the "GitHub Pages" section. If everything worked, you'll be given a link! 
+11. Once Travis finishes, go to your GitHub.com repo's settings, scroll down to find the "GitHub Pages" section. If everything worked, you'll be given a link that points to _username_.github.io !
 
 
 The first time, I got an "Unknown Tag" error. I don't know what caused it, but doing a second build on Jenkins fixed it.
