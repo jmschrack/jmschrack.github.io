@@ -37,21 +37,38 @@ However, it&#39;s a good idea to do this so you can rapidly test changes on your
 &lt;li&gt;Open up Windows Powershell (or command prompt).&lt;/li&gt;
 &lt;li&gt;run &amp;quot;npm install -g @11ty/eleventy&amp;quot;  (without quotes)&lt;/li&gt;
 &lt;li&gt;Go to &lt;a href=&quot;https://github.com/11ty/eleventy-base-blog&quot;&gt;https://github.com/11ty/eleventy-base-blog&lt;/a&gt; and choose &amp;quot;Use This Template&amp;quot; button. Name your repo whatever you want, or leave the default name.&lt;/li&gt;
-&lt;li&gt;On your freshly created/cloned GitHub repository, create a new branch called &amp;quot;gh-pages&amp;quot;. (You&#39;ll leave it blank for now.)&lt;/li&gt;
+&lt;li&gt;On your freshly created/cloned GitHub repository, create a new branch called &amp;quot;dev&amp;quot; (Or whatever you want, all your work will be done here.)  If you want to set this up for a specific repo instead of your &amp;quot;User page&amp;quot;, call the branch &amp;quot;gh-pages&amp;quot;, and skip to step 6.&lt;/li&gt;
+&lt;li&gt;On your github repo&#39;s settings, change the default branch to &amp;quot;dev&amp;quot; and rename your repo to &lt;em&gt;username&lt;/em&gt;.github.io&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&quot;set-up-travisci-to-publish-your-github-repo&quot;&gt;Set up TravisCI to publish your GitHub repo &lt;a class=&quot;direct-link&quot; href=&quot;#set-up-travisci-to-publish-your-github-repo&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;ol start=&quot;5&quot;&gt;
+&lt;ol start=&quot;6&quot;&gt;
 &lt;li&gt;Go to &lt;a href=&quot;https://travis-ci.org/getting_started&quot;&gt;https://travis-ci.org/getting_started&lt;/a&gt; , sign in with github. If you&#39;re feeling lazy, just activate Travis for all repositories.&lt;/li&gt;
 &lt;li&gt;On GitHub, go to your profile Settings&amp;gt;Developer Settings&amp;gt;Personal Access Tokens, and create a new personal access token for TravisCI with the &amp;quot;Repo&amp;quot; permissions. &lt;strong&gt;Copy the key!&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;Go to TravisCI and navigate to your repository, and go to the settings for it. Create a new EnvironmentVariable called &amp;quot;GITHUB_TOKEN&amp;quot;, paste the Access Token you copied in here and click &amp;quot;Add&amp;quot;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&quot;publish-your-page-for-the-first-time&quot;&gt;Publish your page for the first time &lt;a class=&quot;direct-link&quot; href=&quot;#publish-your-page-for-the-first-time&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;ol start=&quot;8&quot;&gt;
-&lt;li&gt;Edit _data/metadata.json and replace some of the place holder data. We do this to do a fresh commit which will trigger our Travis build.&lt;/li&gt;
-&lt;li&gt;(Optionally) If you changed the name of your repo, you will need to edit your .travis.yml and change the &amp;quot;path prefix&amp;quot; to match your repo name.&lt;/li&gt;
-&lt;li&gt;Commit and push your changes now. Go back to TravisCI and watch your build begin.&lt;/li&gt;
-&lt;li&gt;Once Travis finishes, go to your &lt;a href=&quot;http://github.com/&quot;&gt;GitHub.com&lt;/a&gt; repo&#39;s settings, scroll down to find the &amp;quot;GitHub Pages&amp;quot; section. If everything worked, you&#39;ll be given a link!&lt;/li&gt;
+&lt;ol start=&quot;9&quot;&gt;
+&lt;li&gt;If you are not using the User page (i.e. you skipped step 5 above), just change the &amp;quot;pathprefix&amp;quot; in .travis.yml to point to your repo&#39;s name. Otherwise, edit your .travis.yml and change it to the following.:&lt;/li&gt;
 &lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;language: node_js
+node_js:
+  - 8
+before_script:
+  - npm install @11ty/eleventy -g
+script: eleventy --pathprefix=&amp;quot;/&amp;quot;
+deploy:
+  local-dir: _site
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
+  keep-history: true
+  target_branch: master
+  on:
+    branch: dev
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This tells TravisCI to pull from the dev branch, and deploy to the master branch.&lt;br&gt;
+10. Commit and push your changes now. Go back to TravisCI and watch your build begin.&lt;br&gt;
+11. Once Travis finishes, go to your &lt;a href=&quot;http://github.com/&quot;&gt;GitHub.com&lt;/a&gt; repo&#39;s settings, scroll down to find the &amp;quot;GitHub Pages&amp;quot; section. If everything worked, you&#39;ll be given a link that points to &lt;em&gt;username&lt;/em&gt;.github.io !&lt;/p&gt;
 &lt;p&gt;The first time, I got an &amp;quot;Unknown Tag&amp;quot; error. I don&#39;t know what caused it, but doing a second build on Jenkins fixed it.&lt;/p&gt;
 </content>
 	</entry>
