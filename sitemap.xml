@@ -2,22 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://myurl.com/eleventy-portfolio/posts/secondpost/</loc>
-    <lastmod>2018-07-04</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://myurl.com/eleventy-portfolio/posts/thirdpost/</loc>
-    <lastmod>2018-08-24</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://myurl.com/eleventy-portfolio/posts/fourthpost/</loc>
-    <lastmod>2018-09-30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://myurl.com/eleventy-portfolio/posts/firstpost/</loc>
+    <loc>https://myurl.com/eleventy-portfolio/posts/SetupGuide/</loc>
     <lastmod>2020-03-05</lastmod>
   </url>
   
@@ -48,16 +33,6 @@
   
   <url>
     <loc>https://myurl.com/eleventy-portfolio/tags/11ty,eleventy/</loc>
-    <lastmod>2020-03-06</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://myurl.com/eleventy-portfolio/tags/second-tag/</loc>
-    <lastmod>2020-03-06</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://myurl.com/eleventy-portfolio/tags/number-2/</loc>
     <lastmod>2020-03-06</lastmod>
   </url>
 </urlset>
