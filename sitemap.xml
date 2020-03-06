@@ -2,37 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://myurl.com/eleventy-portfolio/posts/SetupGuide/</loc>
+    <loc>https://myurl.com/posts/SetupGuide/</loc>
     <lastmod>2020-03-05</lastmod>
   </url>
   
   <url>
-    <loc>https://myurl.com/eleventy-portfolio/about/</loc>
+    <loc>https://myurl.com/about/</loc>
     <lastmod>2020-03-06</lastmod>
   </url>
   
   <url>
-    <loc>https://myurl.com/eleventy-portfolio/posts/</loc>
+    <loc>https://myurl.com/posts/</loc>
     <lastmod>2020-03-06</lastmod>
   </url>
   
   <url>
-    <loc>https://myurl.com/eleventy-portfolio/</loc>
+    <loc>https://myurl.com/</loc>
     <lastmod>2020-03-06</lastmod>
   </url>
   
   <url>
-    <loc>https://myurl.com/eleventy-portfolio/page-list/</loc>
+    <loc>https://myurl.com/page-list/</loc>
     <lastmod>2020-03-06</lastmod>
   </url>
   
   <url>
-    <loc>https://myurl.com/eleventy-portfolio/tags/</loc>
+    <loc>https://myurl.com/tags/</loc>
     <lastmod>2020-03-06</lastmod>
   </url>
   
   <url>
-    <loc>https://myurl.com/eleventy-portfolio/tags/11ty,eleventy/</loc>
+    <loc>https://myurl.com/tags/11ty,eleventy/</loc>
     <lastmod>2020-03-06</lastmod>
   </url>
 </urlset>
