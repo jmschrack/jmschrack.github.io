@@ -5,21 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Me</title>
     <meta name="Description" content="Jonathan Schrack&#39;s Portfolio">
-    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/w3.css">
     <link rel="stylesheet" href="/css/prism-base16-monokai.dark.css">
     <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="JMSchrack Portfolio">
   </head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
+body {font-size:16px;}
+.w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
+.w3-half img:hover{opacity:1}
+</style>
   <body>
-    <header>
+    <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;">
       <h1 class="home"><a href="/">JMSchrack Portfolio</a></h1>
-      <ul class="nav">
-        <li class="nav-item"><a href="/">Home</a></li>
-        <li class="nav-item"><a href="/posts/">Archive</a></li>
-        <li class="nav-item nav-item-active"><a href="/about/">About Me</a></li>
+      <ul class="w3-bar-block">
+        <li class="nav-item w3-bar-item w3-button w3-hover-white" ><a href="/">Home</a></li>
+        <li class="nav-item w3-bar-item w3-button w3-hover-white" ><a href="/posts/">Archive</a></li>
+        <li class="nav-item nav-item-active w3-bar-item w3-button w3-hover-white" ><a href="/about/">About Me</a></li>
       </ul>
-    </header>
-
-    <main class="tmpl-post">
+    </nav>
+	
+	<header class="w3-container w3-top w3-hide-large w3-red w3-xlarge w3-padding">
+	  <a href="javascript:void(0)" class="w3-button w3-red w3-margin-right" onclick="w3_open()">☰</a>
+	  <span>JMSchrack Portfolio</span>
+	</header>
+	
+	<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+	
+    <main class="tmpl-post w3-container" style="margin-left:340px;margin-right:40px">
       
 
       <h1>About Me</h1>
