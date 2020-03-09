@@ -3,7 +3,10 @@ title: An Idiot's Guide to running Eleventy on GitHub Pages.
 description: Written as if you know almost nothing about any of this tech.
 date: 2020-03-05
 tags:
-  - 11ty,eleventy
+  - tutorial
+  - blog
+  - 11ty
+  - eleventy
 layout: layouts/post.njk
 ---
 When it comes to text tutorials, I prefer them overly verbose. So I'm documenting my process of getting the Eleventy base blog for the next wandering programmer that might come by. 
