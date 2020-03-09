@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ renderData.title or title or metadata.title }}</title>
     <meta name="Description" content="{{ renderData.description or description or metadata.description }}">
-    <link rel="stylesheet" href="{{ '/css/w3.css' | url }}">
-    <link rel="stylesheet" href="{{ '/css/prism-base16-monokai.dark.css' | url }}">
+	<link rel="stylesheet" href="{{ '/css/w3.css' | url }}">
+	<!-- <link rel="stylesheet" href="{{ '/css/index.css' | url }}"> -->
+    
+    <link rel="stylesheet" href="{{ '/css/prism-base16-monokai.dark.css' | url }}"> 
+	
     <link rel="alternate" href="{{ metadata.feed.path | url }}" type="application/atom+xml" title="{{ metadata.title }}">
   </head>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
@@ -17,13 +20,14 @@ body {font-size:16px;}
 .w3-half img:hover{opacity:1}
 </style>
   <body>
-    <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;">
-      <h1 class="home"><a href="{{ '/' | url }}">{{ metadata.title }}</a></h1>
+    <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar">
+	<a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
+      <h1 class="home">{{ metadata.title }}</h1>
 
       {#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
       <ul class="w3-bar-block">
       {%- for entry in collections.all | eleventyNavigation %}
-        <li class="nav-item{% if entry.url == page.url %} nav-item-active{% endif %} w3-bar-item w3-button w3-hover-white" ><a href="{{ entry.url | url }}">{{ entry.title }}</a></li>
+        <li class="nav-item{% if entry.url == page.url %} nav-item-active{% endif %} " ><a class="w3-bar-item w3-button w3-hover-white" href="{{ entry.url | url }}">{{ entry.title }}</a></li>
       {%- endfor %}
       </ul>
     </nav>
@@ -42,7 +46,18 @@ body {font-size:16px;}
     </main>
 
     <footer></footer>
-
+	<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+</script>
     <!-- Current page: {{ page.url | url }} -->
   </body>
 </html>

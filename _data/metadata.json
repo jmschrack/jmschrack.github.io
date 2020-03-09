@@ -1,12 +1,12 @@
 {
-  "title": "JMSchrack Portfolio",
-  "url": "https://myurl.com/",
-  "description": "Jonathan Schrack's Portfolio",
+  "title": "Jonathan Schrack",
+  "url": "https://jmschrack.dev/",
+  "description": "Jonathan Schrack",
   "feed": {
-    "subtitle": "I am writing about my experiences as a naval navel-gazer.",
+    "subtitle": "",
     "filename": "feed.xml",
     "path": "/feed/feed.xml",
-    "id": "https://myurl.com/"
+    "id": ""
   },
   "author": {
     "name": "Jonathan Schrack",
