@@ -2,37 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://myurl.com/posts/SetupGuide/</loc>
+    <loc>https://jmschrack.dev/posts/SetupGuide/</loc>
     <lastmod>2020-03-05</lastmod>
   </url>
   
   <url>
-    <loc>https://myurl.com/about/</loc>
-    <lastmod>2020-03-08</lastmod>
+    <loc>https://jmschrack.dev/about/</loc>
+    <lastmod>2020-03-09</lastmod>
   </url>
   
   <url>
-    <loc>https://myurl.com/posts/</loc>
-    <lastmod>2020-03-08</lastmod>
+    <loc>https://jmschrack.dev/posts/</loc>
+    <lastmod>2020-03-09</lastmod>
   </url>
   
   <url>
-    <loc>https://myurl.com/</loc>
-    <lastmod>2020-03-08</lastmod>
+    <loc>https://jmschrack.dev/</loc>
+    <lastmod>2020-03-09</lastmod>
   </url>
   
   <url>
-    <loc>https://myurl.com/page-list/</loc>
-    <lastmod>2020-03-08</lastmod>
+    <loc>https://jmschrack.dev/page-list/</loc>
+    <lastmod>2020-03-09</lastmod>
   </url>
   
   <url>
-    <loc>https://myurl.com/tags/</loc>
-    <lastmod>2020-03-08</lastmod>
+    <loc>https://jmschrack.dev/tags/</loc>
+    <lastmod>2020-03-09</lastmod>
   </url>
   
   <url>
-    <loc>https://myurl.com/tags/11ty,eleventy/</loc>
-    <lastmod>2020-03-08</lastmod>
+    <loc>https://jmschrack.dev/tags/11ty,eleventy/</loc>
+    <lastmod>2020-03-09</lastmod>
   </url>
 </urlset>

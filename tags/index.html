@@ -3,11 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JMSchrack Portfolio</title>
-    <meta name="Description" content="Jonathan Schrack&#39;s Portfolio">
-    <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="/css/prism-base16-monokai.dark.css">
-    <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="JMSchrack Portfolio">
+    <title>Jonathan Schrack</title>
+    <meta name="Description" content="Jonathan Schrack">
+	<link rel="stylesheet" href="/css/w3.css">
+	<!-- <link rel="stylesheet" href="/css/index.css"> -->
+    
+    <link rel="stylesheet" href="/css/prism-base16-monokai.dark.css"> 
+	
+    <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Jonathan Schrack">
   </head>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 <style>
@@ -17,18 +20,19 @@ body {font-size:16px;}
 .w3-half img:hover{opacity:1}
 </style>
   <body>
-    <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;">
-      <h1 class="home"><a href="/">JMSchrack Portfolio</a></h1>
+    <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar">
+	<a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
+      <h1 class="home">Jonathan Schrack</h1>
       <ul class="w3-bar-block">
-        <li class="nav-item w3-bar-item w3-button w3-hover-white" ><a href="/">Home</a></li>
-        <li class="nav-item w3-bar-item w3-button w3-hover-white" ><a href="/posts/">Archive</a></li>
-        <li class="nav-item w3-bar-item w3-button w3-hover-white" ><a href="/about/">About Me</a></li>
+        <li class="nav-item " ><a class="w3-bar-item w3-button w3-hover-white" href="/">Home</a></li>
+        <li class="nav-item " ><a class="w3-bar-item w3-button w3-hover-white" href="/posts/">Archive</a></li>
+        <li class="nav-item " ><a class="w3-bar-item w3-button w3-hover-white" href="/about/">About Me</a></li>
       </ul>
     </nav>
 	
 	<header class="w3-container w3-top w3-hide-large w3-red w3-xlarge w3-padding">
 	  <a href="javascript:void(0)" class="w3-button w3-red w3-margin-right" onclick="w3_open()">☰</a>
-	  <span>JMSchrack Portfolio</span>
+	  <span>Jonathan Schrack</span>
 	</header>
 	
 	<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
@@ -47,7 +51,18 @@ body {font-size:16px;}
     </main>
 
     <footer></footer>
-
+	<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+</script>
     <!-- Current page: /tags/ -->
   </body>
 </html>

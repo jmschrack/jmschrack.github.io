@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-	<title>JMSchrack Portfolio</title>
-	<subtitle>I am writing about my experiences as a naval navel-gazer.</subtitle>
+	<title>Jonathan Schrack</title>
+	<subtitle></subtitle>
 	
-	<link href="https://myurl.com/feed/feed.xml" rel="self"/>
-	<link href="https://myurl.com/"/>
+	<link href="https://jmschrack.dev/feed/feed.xml" rel="self"/>
+	<link href="https://jmschrack.dev/"/>
 	<updated>2020-03-05T00:00:00-00:00</updated>
-	<id>https://myurl.com/</id>
+	<id></id>
 	<author>
 		<name>Jonathan Schrack</name>
 		<email>jonathan.schrack@digitalprecept.com</email>
@@ -14,9 +14,9 @@
 	
 	<entry>
 		<title>An Idiot&#39;s Guide to running Eleventy on GitHub Pages.</title>
-		<link href="https://myurl.com/posts/SetupGuide/"/>
+		<link href="https://jmschrack.dev/posts/SetupGuide/"/>
 		<updated>2020-03-05T00:00:00-00:00</updated>
-		<id>https://myurl.com/posts/SetupGuide/</id>
+		<id>https://jmschrack.dev/posts/SetupGuide/</id>
 		<content type="html">&lt;p&gt;When it comes to text tutorials, I prefer them overly verbose. So I&#39;m documenting my process of getting the Eleventy base blog for the next wandering programmer that might come by.&lt;br&gt;
 I&#39;ve used Continuous Integation before, but never TravisCI. I&#39;ve used git and GitHub before, but never GitHub pages. And of course, I&#39;ve never used eleventy before now.&lt;br&gt;
 The whole point of SSG is to enable you to just focus on the content of your website, and not the infrastructure. However, if you haven&#39;t used all of these components, guess what you&#39;re wasting time trying to figure out?&lt;br&gt;
