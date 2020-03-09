@@ -13,6 +13,37 @@
 	</author>
 	
 	<entry>
+		<title>Unity3D AMF-Importer</title>
+		<link href="https://jmschrack.dev/posts/UnityAMFImporter/"/>
+		<updated>2019-02-04T00:00:00-00:00</updated>
+		<id>https://jmschrack.dev/posts/UnityAMFImporter/</id>
+		<content type="html">&lt;h1 id=&quot;wip&quot;&gt;WIP &lt;a class=&quot;direct-link&quot; href=&quot;#wip&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
+</content>
+	</entry>
+	
+	<entry>
+		<title>Mend</title>
+		<link href="https://jmschrack.dev/posts/Mend/"/>
+		<updated>2020-02-10T00:00:00-00:00</updated>
+		<id>https://jmschrack.dev/posts/Mend/</id>
+		<content type="html">&lt;h1 id=&quot;wip&quot;&gt;WIP &lt;a class=&quot;direct-link&quot; href=&quot;#wip&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;(Title picture)&lt;br&gt;
+I am the main XR and Software Developer for Mend!&lt;/p&gt;
+&lt;p&gt;The feature I&#39;m most proud of are the spatial dependent collision platforms.&lt;/p&gt;
+&lt;h2 id=&quot;inspiration&quot;&gt;Inspiration &lt;a class=&quot;direct-link&quot; href=&quot;#inspiration&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;It&#39;s heavily inspired from Super Mario Galaxy&#39;s invisible platforms; these platforms are revealed within a radius of a torch. However, they platforms are always there regardless if you can see them or not.&lt;/p&gt;
+&lt;h2 id=&quot;the-twist&quot;&gt;The Twist &lt;a class=&quot;direct-link&quot; href=&quot;#the-twist&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Justin Palmer, Mend&#39;s Game Designer:  &amp;quot;I really wish we could make the collisions operate the same way as the visuals.&amp;quot;&lt;br&gt;
+Jonathan: &amp;quot;Give me an hour. I think can make it work.&amp;quot;&lt;/p&gt;
+&lt;p&gt;The core aspect of this game is cooperative game play. The VR player can move boxes and reveal platforms for the non-VR player to use. However, you don&#39;t need the VR player if you know where the invisible platforms are.&lt;br&gt;
+So instead of making them invisible, we make them cease to exist outside of the orb&#39;s range.  I then took it one step further, and devised a method of controlling collisions for partials views as well.&lt;br&gt;
+Now the game really requires team work to complete!&lt;/p&gt;
+&lt;h1 id=&quot;the-result&quot;&gt;The result &lt;a class=&quot;direct-link&quot; href=&quot;#the-result&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;(animated gif of it working)&lt;/p&gt;
+</content>
+	</entry>
+	
+	<entry>
 		<title>An Idiot&#39;s Guide to running Eleventy on GitHub Pages.</title>
 		<link href="https://jmschrack.dev/posts/SetupGuide/"/>
 		<updated>2020-03-05T00:00:00-00:00</updated>

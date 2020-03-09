@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jmschrack.dev/posts/UnityAMFImporter/</loc>
+    <lastmod>2019-02-04</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jmschrack.dev/posts/Mend/</loc>
+    <lastmod>2020-02-10</lastmod>
+  </url>
+  
+  <url>
     <loc>https://jmschrack.dev/posts/SetupGuide/</loc>
     <lastmod>2020-03-05</lastmod>
   </url>
@@ -27,12 +37,57 @@
   </url>
   
   <url>
+    <loc>https://jmschrack.dev/portfolio/</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>
+  
+  <url>
     <loc>https://jmschrack.dev/tags/</loc>
     <lastmod>2020-03-09</lastmod>
   </url>
   
   <url>
-    <loc>https://jmschrack.dev/tags/11ty,eleventy/</loc>
+    <loc>https://jmschrack.dev/tags/Unity3D/</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jmschrack.dev/tags/XR/</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jmschrack.dev/tags/Oculus/</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jmschrack.dev/tags/portfolio/</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jmschrack.dev/tags/blog/</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jmschrack.dev/tags/11ty/</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jmschrack.dev/tags/eleventy/</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jmschrack.dev/tags/github/</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jmschrack.dev/tags/tutorial/</loc>
     <lastmod>2020-03-09</lastmod>
   </url>
 </urlset>
