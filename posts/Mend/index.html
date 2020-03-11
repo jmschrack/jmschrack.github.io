@@ -47,15 +47,34 @@ body {font-size:16px;}
 			<h1 class="w3-xxxlarge w3-text-red"><b>Mend</b></h1>
 			<hr style="width:50px;border:5px solid red" class="w3-round">
 		</div>
-<h1 id="this-page-is-a-work-in-progress"><code>This page is a work in progress</code> <a class="direct-link" href="#this-page-is-a-work-in-progress">#</a></h1>
 <p><img src="/img/Mend_400x400.jpg" alt="alt text" title="Mend Title Card"></p>
-<p>I am the main XR and Software Developer for Mend!</p>
-<p>The feature I'm most proud of are the spatial dependent collision platforms.</p>
+<p>I am the main XR and Software Developer for Mend!<br>
+Mend is a 2 player, asymetrical co-op game for VR.  It is designed by Justin Palmer and was originally an Oculus LaunchPad title.<br>
+I developed the core game systems built to Justin's specifications, including:</p>
+<ul>
+<li>an XR Interaction Rig we use that abstracts object usage logic away from the core VR camera rig.
+<ul>
+<li>&quot;Grab &amp; Pull&quot; locomotion keyed to the hand controller update sequence for as smooth as possible movement</li>
+<li>Physics based object manipulation. (aka you can pick up things)</li>
+</ul>
+</li>
+<li>Extensive modifications to FMOD to allow dual speaker outputs so the VR player has their own localized audio that is distinct from the pancake player</li>
+<li>An input remapper built on top of Oculus' OVRInput system to allow easy control customization</li>
+<li>Spatial dependent collision platforms!</li>
+</ul>
+<p>Check out the first gameplay trailer here! <a href="https://www.youtube.com/watch?v=CKeRf5Wvzjg">https://www.youtube.com/watch?v=CKeRf5Wvzjg</a></p>
+<p>I'm really proud of the spatial dependent collision platforms, and I want to explain more in depth.</p>
 <h2 id="inspiration">Inspiration <a class="direct-link" href="#inspiration">#</a></h2>
 <p>It's heavily inspired from Super Mario Galaxy's invisible platforms; these platforms are revealed within a radius of a torch. However, they platforms are always there regardless if you can see them or not.</p>
 <h2 id="the-twist">The Twist <a class="direct-link" href="#the-twist">#</a></h2>
-<p>Justin Palmer, Mend's Game Designer:  &quot;I really wish we could make the collisions operate the same way as the visuals.&quot;<br>
-Jonathan: &quot;Give me an hour. I think can make it work.&quot;</p>
+<p>Justin Palmer, Mend's Game Designer:</p>
+<blockquote>
+<p>&quot;I really wish we could make the collisions operate the same way as the visuals.&quot;</p>
+</blockquote>
+<p>Jonathan:</p>
+<blockquote>
+<p>&quot;Give me an hour. I think can make it work.&quot;</p>
+</blockquote>
 <p>The core aspect of this game is cooperative game play. The VR player can move boxes and reveal platforms for the non-VR player to use. However, you don't need the VR player if you know where the invisible platforms are.<br>
 So instead of making them invisible, we make them cease to exist outside of the orb's range.  I then took it one step further, and devised a method of controlling collisions for partials views as well.<br>
 Now the game really requires team work to complete!</p>
