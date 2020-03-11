@@ -7,6 +7,11 @@
   </url>
   
   <url>
+    <loc>https://jmschrack.dev/posts/BLE4Unity/</loc>
+    <lastmod>2019-02-28</lastmod>
+  </url>
+  
+  <url>
     <loc>https://jmschrack.dev/posts/Mend/</loc>
     <lastmod>2020-02-10</lastmod>
   </url>
@@ -52,17 +57,22 @@
   </url>
   
   <url>
+    <loc>https://jmschrack.dev/tags/github/</loc>
+    <lastmod>2020-03-11</lastmod>
+  </url>
+  
+  <url>
     <loc>https://jmschrack.dev/tags/XR/</loc>
     <lastmod>2020-03-11</lastmod>
   </url>
   
   <url>
-    <loc>https://jmschrack.dev/tags/Oculus/</loc>
+    <loc>https://jmschrack.dev/tags/portfolio/</loc>
     <lastmod>2020-03-11</lastmod>
   </url>
   
   <url>
-    <loc>https://jmschrack.dev/tags/portfolio/</loc>
+    <loc>https://jmschrack.dev/tags/tutorial/</loc>
     <lastmod>2020-03-11</lastmod>
   </url>
   
@@ -82,12 +92,7 @@
   </url>
   
   <url>
-    <loc>https://jmschrack.dev/tags/github/</loc>
-    <lastmod>2020-03-11</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jmschrack.dev/tags/tutorial/</loc>
+    <loc>https://jmschrack.dev/tags/Oculus/</loc>
     <lastmod>2020-03-11</lastmod>
   </url>
 </urlset>

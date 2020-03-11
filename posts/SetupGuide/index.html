@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>An Idiot&#39;s Guide to running Eleventy on GitHub Pages.</title>
     <meta name="Description" content="Written as if you know almost nothing about any of this tech.">
-	<link rel="stylesheet" href="/css/w3.css">
 	<!-- <link rel="stylesheet" href="/css/index.css"> -->
+	<link rel="stylesheet" href="/css/w3.css">
+	<!--  -->
     
     <link rel="stylesheet" href="/css/prism-base16-monokai.dark.css"> 
 	
@@ -39,10 +40,13 @@ body {font-size:16px;}
 	<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 	
     <main class="tmpl-post w3-main" style="margin-left:340px;margin-right:40px">
-      
+		
 
-      <h1>An Idiot&#39;s Guide to running Eleventy on GitHub Pages.</h1>
-
+      <h1></h1>
+<div class="w3-container" style="margin-top:80px" id="showcase">
+			<h1 class="w3-xxxlarge w3-text-red"><b>An Idiot&#39;s Guide to running Eleventy on GitHub Pages.</b></h1>
+			<hr style="width:50px;border:5px solid red" class="w3-round">
+		</div>
 <p>When it comes to text tutorials, I prefer them overly verbose. So I'm documenting my process of getting the Eleventy base blog for the next wandering programmer that might come by.<br>
 I've used Continuous Integation before, but never TravisCI. I've used git and GitHub before, but never GitHub pages. And of course, I've never used eleventy before now.<br>
 The whole point of SSG is to enable you to just focus on the content of your website, and not the infrastructure. However, if you haven't used all of these components, guess what you're wasting time trying to figure out?<br>
