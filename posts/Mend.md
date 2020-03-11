@@ -9,9 +9,9 @@ tags:
   - Oculus
 layout: layouts/post.njk
 ---
-#This page is a work in progress
+# `This page is a work in progress`
+![alt text]( {{ '/img/Mend_400x400.jpg' | url }} "Mend Title Card")
 
-https://youtu.be/CKeRf5Wvzjg
 
 
 I am the main XR and Software Developer for Mend!  
