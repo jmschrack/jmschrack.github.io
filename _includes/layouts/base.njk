@@ -40,7 +40,7 @@ body {font-size:16px;}
 	<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 	
     <main{% if templateClass %} class="{{ templateClass }} w3-main"{% endif %} style="margin-left:340px;margin-right:40px">
-      
+		
 
       {{ content | safe }}
     </main>
