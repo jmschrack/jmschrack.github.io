@@ -9,11 +9,11 @@ tags:
   - Oculus
 layout: layouts/post.njk
 ---
-# WIP
+#This page is a work in progress
 
 https://youtu.be/CKeRf5Wvzjg
 
-(Title picture)
+
 I am the main XR and Software Developer for Mend!  
 
 The feature I'm most proud of are the spatial dependent collision platforms.  
@@ -32,3 +32,5 @@ Now the game really requires team work to complete!
 
 # The result
 (animated gif of it working)
+
+Find out more at https://twitter.com/mendthegame 
