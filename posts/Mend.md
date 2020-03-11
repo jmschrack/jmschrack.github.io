@@ -10,6 +10,9 @@ tags:
 layout: layouts/post.njk
 ---
 # WIP
+
+https://youtu.be/CKeRf5Wvzjg
+
 (Title picture)
 I am the main XR and Software Developer for Mend!  
 
