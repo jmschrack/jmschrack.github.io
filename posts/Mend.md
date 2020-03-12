@@ -33,11 +33,11 @@ I'm really proud of the spatial dependent collision platforms, and I want to exp
 It's heavily inspired from Super Mario Galaxy's invisible platforms; these platforms are revealed within a radius of a torch. However, they platforms are always there regardless if you can see them or not.
 
 ## The Twist
-Justin Palmer, Mend's Game Designer:  
-> "I really wish we could make the collisions operate the same way as the visuals."
 
-Jonathan: 
-> "Give me an hour. I think can make it work."
+> I really wish we could make the collisions operate the same way as the visuals. - _Justin Palmer_, _Mend's Game Designer_
+
+ 
+> "Give me an hour. I think can make it work."  - _Jonathan_
 
 The core aspect of this game is cooperative game play. The VR player can move boxes and reveal platforms for the non-VR player to use. However, you don't need the VR player if you know where the invisible platforms are.
 So instead of making them invisible, we make them cease to exist outside of the orb's range.  I then took it one step further, and devised a method of controlling collisions for partials views as well.
