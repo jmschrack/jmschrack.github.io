@@ -62,26 +62,6 @@
   </url>
   
   <url>
-    <loc>https://jmschrack.dev/tags/tutorial/</loc>
-    <lastmod>2020-03-12</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jmschrack.dev/tags/blog/</loc>
-    <lastmod>2020-03-12</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jmschrack.dev/tags/portfolio/</loc>
-    <lastmod>2020-03-12</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jmschrack.dev/tags/eleventy/</loc>
-    <lastmod>2020-03-12</lastmod>
-  </url>
-  
-  <url>
     <loc>https://jmschrack.dev/tags/games/</loc>
     <lastmod>2020-03-12</lastmod>
   </url>
@@ -92,12 +72,32 @@
   </url>
   
   <url>
-    <loc>https://jmschrack.dev/tags/Oculus/</loc>
+    <loc>https://jmschrack.dev/tags/portfolio/</loc>
+    <lastmod>2020-03-12</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jmschrack.dev/tags/tutorial/</loc>
+    <lastmod>2020-03-12</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jmschrack.dev/tags/blog/</loc>
     <lastmod>2020-03-12</lastmod>
   </url>
   
   <url>
     <loc>https://jmschrack.dev/tags/11ty/</loc>
+    <lastmod>2020-03-12</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jmschrack.dev/tags/eleventy/</loc>
+    <lastmod>2020-03-12</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jmschrack.dev/tags/Oculus/</loc>
     <lastmod>2020-03-12</lastmod>
   </url>
 </urlset>
