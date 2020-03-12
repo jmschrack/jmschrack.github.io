@@ -42,8 +42,9 @@ body {font-size:16px;}
 	
     <main{% if templateClass %} class="{{ templateClass }} w3-main"{% endif %} style="margin-left:340px;margin-right:40px">
 		
-
-      {{ content | safe }}
+		<div class="w3-container">
+			{{ content | safe }}
+		</div>
     </main>
 
     <footer></footer>
