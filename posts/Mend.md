@@ -25,6 +25,9 @@ I developed the core game systems built to Justin's specifications, including:
   - Spatial dependent collision platforms!
 
 Check out the first gameplay trailer here!  
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/CKeRf5Wvzjg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 [![Watch the video](https://img.youtube.com/vi/CKeRf5Wvzjg/maxresdefault.jpg)](https://www.youtube.com/watch?v=CKeRf5Wvzjg)
 
 
