@@ -28,7 +28,7 @@ Check out the first gameplay trailer here!
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/CKeRf5Wvzjg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-[![Watch the video](https://img.youtube.com/vi/CKeRf5Wvzjg/maxresdefault.jpg)](https://www.youtube.com/watch?v=CKeRf5Wvzjg)
+
 
 
 
@@ -62,5 +62,5 @@ We already had a method of partially rendering platforms that were in range. I t
 Now the game really requires team work to complete!
 (animated gif showing Owl and Fox working in tandem to platform)
 
-
-Find out more at https://twitter.com/mendthegame 
+# More about Mend
+<a class="twitter-timeline" href="https://twitter.com/MendTheGame?ref_src=twsrc%5Etfw">Tweets by MendTheGame</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
