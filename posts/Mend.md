@@ -24,13 +24,16 @@ I developed the core game systems built to Justin's specifications, including:
   - An input remapper built on top of Oculus' OVRInput system to allow easy control customization
   - Spatial dependent collision platforms!
 
-Check out the first gameplay trailer here! https://www.youtube.com/watch?v=CKeRf5Wvzjg 
+Check out the first gameplay trailer here!  
+[![Watch the video](https://img.youtube.com/vi/CKeRf5Wvzjg/maxresdefault.jpg)](https://www.youtube.com/watch?v=CKeRf5Wvzjg)
 
 
-I'm really proud of the spatial dependent collision platforms, and I want to explain more in depth.
+
+# Feature Highlight: Spatial Dependent Collision
+I'm really proud of this, and I want to explain more in depth.
 
 ## Inspiration
-It's heavily inspired from Super Mario Galaxy's invisible platforms; these platforms are revealed within a radius of a torch. However, they platforms are always there regardless if you can see them or not.
+Having invisible platforms is not a novel idea in video games. The logical progression is a tool or itemIt's heavily inspired from Super Mario Galaxy's invisible platforms; these platforms are revealed within a radius of a torch. However, they platforms are always there regardless if you can see them or not.
 
 ## The Twist
 
