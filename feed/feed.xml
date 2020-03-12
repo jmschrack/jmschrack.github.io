@@ -53,21 +53,29 @@ I developed the core game systems built to Justin&#39;s specifications, includin
 &lt;p&gt;Check out the first gameplay trailer here!&lt;br&gt;
 &lt;a href=&quot;https://www.youtube.com/watch?v=CKeRf5Wvzjg&quot;&gt;&lt;img src=&quot;https://img.youtube.com/vi/CKeRf5Wvzjg/maxresdefault.jpg&quot; alt=&quot;Watch the video&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;feature-highlight%3A-spatial-dependent-collision&quot;&gt;Feature Highlight: Spatial Dependent Collision &lt;a class=&quot;direct-link&quot; href=&quot;#feature-highlight%3A-spatial-dependent-collision&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;I&#39;m really proud of this, and I want to explain more in depth.&lt;/p&gt;
+&lt;p&gt;I&#39;m really proud of this, and I want to explain more in depth.&lt;br&gt;
+&lt;em&gt;&lt;strong&gt;Dictionary of Terms&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;VR Player&lt;/strong&gt; : the person wearing the VR headset. This is the &amp;quot;Owl sister&amp;quot; seen in screenshots and gameplay.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Flat Player&lt;/strong&gt; : the person using a controller and computer monitor and &lt;em&gt;no&lt;/em&gt; VR headset. This is the &amp;quot;Fox sister&amp;quot; seen in screenshots and gameplayer.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&quot;inspiration&quot;&gt;Inspiration &lt;a class=&quot;direct-link&quot; href=&quot;#inspiration&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Having invisible platforms is not a novel idea in video games. The logical progression is a tool or itemIt&#39;s heavily inspired from Super Mario Galaxy&#39;s invisible platforms; these platforms are revealed within a radius of a torch. However, they platforms are always there regardless if you can see them or not.&lt;/p&gt;
+&lt;p&gt;Having invisible platforms is not a novel idea in video games. The logical progression is a tool or item that reveals the platforms.&lt;br&gt;
+For an example from Super Mario Galaxy:&lt;br&gt;
+&lt;img src=&quot;https://jmschrack.dev/img/smg_invisplat.gif&quot; alt=&quot;alt text&quot; title=&quot;SMG Invis Platform example&quot;&gt;&lt;/p&gt;
+&lt;p&gt;The first obvious use case for a 2 player game, is that Player1 controls the tool to reveal the platforms that Player2 has to use.&lt;/p&gt;
 &lt;h2 id=&quot;the-twist&quot;&gt;The Twist &lt;a class=&quot;direct-link&quot; href=&quot;#the-twist&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;I really wish we could make the collisions operate the same way as the visuals. - &lt;em&gt;Justin Palmer&lt;/em&gt;, &lt;em&gt;Mend&#39;s Game Designer&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&amp;quot;Give me an hour. I think can make it work.&amp;quot;  - &lt;em&gt;Jonathan&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;The core aspect of this game is cooperative game play. The VR player can move boxes and reveal platforms for the non-VR player to use. However, you don&#39;t need the VR player if you know where the invisible platforms are.&lt;br&gt;
-So instead of making them invisible, we make them cease to exist outside of the orb&#39;s range.  I then took it one step further, and devised a method of controlling collisions for partials views as well.&lt;br&gt;
-Now the game really requires team work to complete!&lt;/p&gt;
+&lt;p&gt;The core aspect that Justin wanted to have is that the players &lt;strong&gt;need&lt;/strong&gt; each other, and cannot complete the level without each other.&lt;br&gt;
+We already accomplished this with platforms as The VR player is the only player that can move the platforms for the non-VR player to use.&lt;br&gt;
+However, once the VR Player revealed the invisible platforms to the Flat Player, the Flat Player could just remember where to run and jump, removing agency from the VR Player as they just had nothing else to do.&lt;/p&gt;
+&lt;p&gt;We already had a method of partially rendering platforms that were in range. I then took it one step further, and devised a method of controlling collisions for partials views as well. The Flat Player (and any other physics objects we want!) will now fall through any invisible sections in the geometry.&lt;/p&gt;
 &lt;h1 id=&quot;the-result&quot;&gt;The result &lt;a class=&quot;direct-link&quot; href=&quot;#the-result&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;(animated gif of it working)&lt;/p&gt;
+&lt;p&gt;(animated gif showing partial collision dynamically with a bunch of boxes)&lt;/p&gt;
+&lt;p&gt;Now the game really requires team work to complete!&lt;br&gt;
+(animated gif showing Owl and Fox working in tandem to platform)&lt;/p&gt;
 &lt;p&gt;Find out more at &lt;a href=&quot;https://twitter.com/mendthegame&quot;&gt;https://twitter.com/mendthegame&lt;/a&gt;&lt;/p&gt;
 </content>
 	</entry>

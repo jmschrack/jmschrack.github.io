@@ -65,21 +65,29 @@ I developed the core game systems built to Justin's specifications, including:</
 <p>Check out the first gameplay trailer here!<br>
 <a href="https://www.youtube.com/watch?v=CKeRf5Wvzjg"><img src="https://img.youtube.com/vi/CKeRf5Wvzjg/maxresdefault.jpg" alt="Watch the video"></a></p>
 <h1 id="feature-highlight%3A-spatial-dependent-collision">Feature Highlight: Spatial Dependent Collision <a class="direct-link" href="#feature-highlight%3A-spatial-dependent-collision">#</a></h1>
-<p>I'm really proud of this, and I want to explain more in depth.</p>
+<p>I'm really proud of this, and I want to explain more in depth.<br>
+<em><strong>Dictionary of Terms</strong></em></p>
+<ul>
+<li><strong>VR Player</strong> : the person wearing the VR headset. This is the &quot;Owl sister&quot; seen in screenshots and gameplay.</li>
+<li><strong>Flat Player</strong> : the person using a controller and computer monitor and <em>no</em> VR headset. This is the &quot;Fox sister&quot; seen in screenshots and gameplayer.</li>
+</ul>
 <h2 id="inspiration">Inspiration <a class="direct-link" href="#inspiration">#</a></h2>
-<p>Having invisible platforms is not a novel idea in video games. The logical progression is a tool or itemIt's heavily inspired from Super Mario Galaxy's invisible platforms; these platforms are revealed within a radius of a torch. However, they platforms are always there regardless if you can see them or not.</p>
+<p>Having invisible platforms is not a novel idea in video games. The logical progression is a tool or item that reveals the platforms.<br>
+For an example from Super Mario Galaxy:<br>
+<img src="/img/smg_invisplat.gif" alt="alt text" title="SMG Invis Platform example"></p>
+<p>The first obvious use case for a 2 player game, is that Player1 controls the tool to reveal the platforms that Player2 has to use.</p>
 <h2 id="the-twist">The Twist <a class="direct-link" href="#the-twist">#</a></h2>
 <blockquote>
 <p>I really wish we could make the collisions operate the same way as the visuals. - <em>Justin Palmer</em>, <em>Mend's Game Designer</em></p>
 </blockquote>
-<blockquote>
-<p>&quot;Give me an hour. I think can make it work.&quot;  - <em>Jonathan</em></p>
-</blockquote>
-<p>The core aspect of this game is cooperative game play. The VR player can move boxes and reveal platforms for the non-VR player to use. However, you don't need the VR player if you know where the invisible platforms are.<br>
-So instead of making them invisible, we make them cease to exist outside of the orb's range.  I then took it one step further, and devised a method of controlling collisions for partials views as well.<br>
-Now the game really requires team work to complete!</p>
+<p>The core aspect that Justin wanted to have is that the players <strong>need</strong> each other, and cannot complete the level without each other.<br>
+We already accomplished this with platforms as The VR player is the only player that can move the platforms for the non-VR player to use.<br>
+However, once the VR Player revealed the invisible platforms to the Flat Player, the Flat Player could just remember where to run and jump, removing agency from the VR Player as they just had nothing else to do.</p>
+<p>We already had a method of partially rendering platforms that were in range. I then took it one step further, and devised a method of controlling collisions for partials views as well. The Flat Player (and any other physics objects we want!) will now fall through any invisible sections in the geometry.</p>
 <h1 id="the-result">The result <a class="direct-link" href="#the-result">#</a></h1>
-<p>(animated gif of it working)</p>
+<p>(animated gif showing partial collision dynamically with a bunch of boxes)</p>
+<p>Now the game really requires team work to complete!<br>
+(animated gif showing Owl and Fox working in tandem to platform)</p>
 <p>Find out more at <a href="https://twitter.com/mendthegame">https://twitter.com/mendthegame</a></p>
 
 
