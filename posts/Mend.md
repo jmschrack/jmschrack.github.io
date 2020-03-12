@@ -30,24 +30,34 @@ Check out the first gameplay trailer here!
 
 
 # Feature Highlight: Spatial Dependent Collision
-I'm really proud of this, and I want to explain more in depth.
+I'm really proud of this, and I want to explain more in depth. 
+___Dictionary of Terms___
+ - __VR Player__ : the person wearing the VR headset. This is the "Owl sister" seen in screenshots and gameplay.
+ - __Flat Player__ : the person using a controller and computer monitor and _no_ VR headset. This is the "Fox sister" seen in screenshots and gameplayer.
 
 ## Inspiration
-Having invisible platforms is not a novel idea in video games. The logical progression is a tool or itemIt's heavily inspired from Super Mario Galaxy's invisible platforms; these platforms are revealed within a radius of a torch. However, they platforms are always there regardless if you can see them or not.
+Having invisible platforms is not a novel idea in video games. The logical progression is a tool or item that reveals the platforms.
+For an example from Super Mario Galaxy:
+![alt text]( {{ '/img/smg_invisplat.gif' | url }} "SMG Invis Platform example")
+
+The first obvious use case for a 2 player game, is that Player1 controls the tool to reveal the platforms that Player2 has to use.
+
 
 ## The Twist
 
 > I really wish we could make the collisions operate the same way as the visuals. - _Justin Palmer_, _Mend's Game Designer_
 
- 
-> "Give me an hour. I think can make it work."  - _Jonathan_
+The core aspect that Justin wanted to have is that the players __need__ each other, and cannot complete the level without each other.
+We already accomplished this with platforms as The VR player is the only player that can move the platforms for the non-VR player to use. 
+However, once the VR Player revealed the invisible platforms to the Flat Player, the Flat Player could just remember where to run and jump, removing agency from the VR Player as they just had nothing else to do.
 
-The core aspect of this game is cooperative game play. The VR player can move boxes and reveal platforms for the non-VR player to use. However, you don't need the VR player if you know where the invisible platforms are.
-So instead of making them invisible, we make them cease to exist outside of the orb's range.  I then took it one step further, and devised a method of controlling collisions for partials views as well.
-Now the game really requires team work to complete!
-
+We already had a method of partially rendering platforms that were in range. I then took it one step further, and devised a method of controlling collisions for partials views as well. The Flat Player (and any other physics objects we want!) will now fall through any invisible sections in the geometry.
 
 # The result
-(animated gif of it working)
+(animated gif showing partial collision dynamically with a bunch of boxes)
+
+Now the game really requires team work to complete!
+(animated gif showing Owl and Fox working in tandem to platform)
+
 
 Find out more at https://twitter.com/mendthegame 
