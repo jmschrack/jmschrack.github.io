@@ -43,7 +43,7 @@ Having invisible platforms is not a novel idea in video games. The logical progr
 For an example from Super Mario Galaxy:
 ![alt text]( {{ '/img/smg_invisplat.gif' | url }} "SMG Invis Platform example")
 
-The first obvious use case for a 2 player game, is that Player1 controls the tool to reveal the platforms that Player2 has to use.
+The obvious use case for a 2 player game, is that Player1 controls the tool to reveal the platforms that Player2 has to use.
 
 
 ## The Twist
