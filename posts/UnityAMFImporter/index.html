@@ -57,7 +57,7 @@ body {font-size:16px;}
 <p>Huge shoutout to Shelley and the rest of the folks over on the Reclaimers discord. Shelley had a decompiled version of the 3DS importer plugin. With this, I was able to write my own C# importer to allow Unity to import AMF files natively as if they were 3D models! ...almost.</p>
 <p><img src="/img/IsolationFubar.png" alt="alt text" title="Isolation messed up"></p>
 <h2 id="geometry">Geometry <a class="direct-link" href="#geometry">#</a></h2>
-<p>Huge thanks to Kim Duran &amp; <a href="https://www.linkedin.com/in/hunter-gore-9960b0148">Hunter Gore</a> for helping me with matrix transform math!</p>
+<p>Huge thanks to <a href="https://www.linkedin.com/in/kimberly-duran-80b16b149/">Kim Duran</a> &amp; <a href="https://www.linkedin.com/in/hunter-gore-9960b0148">Hunter Gore</a> for helping me with matrix transform math!</p>
 <p>Halo/3DS uses a right handed, z-up coordinate system, while Unity uses a left-handed Y-up system.  Converting between the two ended up being slightly trickier than it should have been. As the coordinates would be extracted from the raw AMF file, but then certain modifiers and transforms would be applied based on the geometry name.<br>
 <img src="/img/IsolationFubar2.png" alt="alt text" title="Isolation partially correct"></p>
 <p>Thankfully, geometry falls into two catergories of terrain or instances.<br>
