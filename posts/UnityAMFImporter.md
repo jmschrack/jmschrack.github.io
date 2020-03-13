@@ -65,3 +65,7 @@ Is a pretty servicable importer for AMF files into Unity! It's not perfect, but 
 
 The full source code is on GitHub:
 https://github.com/jmschrack/Unity3D-AMFImporter 
+
+# Wait what about that Render test?
+4 player splitscreen hit max frame rate 30FPS on an android tablet. (Screen is locked at VSync. Judging by the CPU stats, it could feasible hit 50+FPS without VSync)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7W2QDMUuvdY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
