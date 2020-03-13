@@ -17,17 +17,42 @@
 		<link href="https://jmschrack.dev/posts/UnityAMFImporter/"/>
 		<updated>2019-02-04T00:00:00-00:00</updated>
 		<id>https://jmschrack.dev/posts/UnityAMFImporter/</id>
-		<content type="html">&lt;h1 id=&quot;wip&quot;&gt;WIP &lt;a class=&quot;direct-link&quot; href=&quot;#wip&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
-&lt;h2 id=&quot;down-the-rabbit-hole...&quot;&gt;Down the rabbit hole... &lt;a class=&quot;direct-link&quot; href=&quot;#down-the-rabbit-hole...&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+		<content type="html">&lt;p&gt;&lt;img src=&quot;https://jmschrack.dev/img/AMFImporter.png&quot; alt=&quot;alt text&quot; title=&quot;Adjutant to Unity&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;the-impetus&quot;&gt;The impetus &lt;a class=&quot;direct-link&quot; href=&quot;#the-impetus&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I wanted to test the efficiency of rendering a FPS multiplayer map on some low end hardware. So I started to make a map when I realized, why waste time on a theoretical map, when I could use an existing map from an FPS? Then I recalled that I used to play a lot of Halo:CE in college.  Not &amp;quot;Combat Evolved&amp;quot; but &amp;quot;&lt;em&gt;Custom Edition&lt;/em&gt;&amp;quot;.&lt;/p&gt;
 &lt;p&gt;Custom Edition had tools that allowed the community to create custom levels, maps, guns, etc. But I didn&#39;t want to use someone else&#39; map; I wanted to use one of the official maps as a benchmark for my performance test. So I did some research and came across a fan made tool called &amp;quot;Adjutant&amp;quot; that lets you extract geometry and textures from the Halo map files. Even better it supported Halo 3 assets! So I open up &amp;quot;Isolation&amp;quot; multiplayer map from Halo 3. Extract the textures as PNGs and extract the model as... AMF?&lt;/p&gt;
+&lt;h2 id=&quot;down-the-rabbit-hole...&quot;&gt;Down the rabbit hole... &lt;a class=&quot;direct-link&quot; href=&quot;#down-the-rabbit-hole...&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;So the Adjutant mod team had created their own model file format to extract as.  They then provided an import script plugin for 3DS...2005.  I don&#39;t own 3DS Max, much less the older precursor. So I started investigating if anyone had made a Blender plugin that could import AMF.  No one had. Most of the documentation and mod posts I was finding for Halo:CE were circa 2003 at best. However, by chance I ran across a forum post dated late 2018 of someone talking about making a Blender plugin.&lt;/p&gt;
 &lt;p&gt;Huge shoutout to Shelley and the rest of the folks over on the Reclaimers discord. Shelley had a decompiled version of the 3DS importer plugin. With this, I was able to write my own C# importer to allow Unity to import AMF files natively as if they were 3D models! ...almost.&lt;/p&gt;
-&lt;p&gt;(photo of jacked up isolation)&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://jmschrack.dev/img/IsolationFubar.png&quot; alt=&quot;alt text&quot; title=&quot;Isolation messed up&quot;&gt;&lt;/p&gt;
 &lt;h2 id=&quot;geometry&quot;&gt;Geometry &lt;a class=&quot;direct-link&quot; href=&quot;#geometry&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Halo/3DS uses a right handed, z-up coordinate system, while Unity uses a left-handed Y-up system.  Converting between the two ended up being slightly trickier than it should have been. As the coordinates would be extracted from the raw AMF file, but then certain modifiers and transforms would be applied based on the geometry name.&lt;/p&gt;
+&lt;p&gt;Halo/3DS uses a right handed, z-up coordinate system, while Unity uses a left-handed Y-up system.  Converting between the two ended up being slightly trickier than it should have been. As the coordinates would be extracted from the raw AMF file, but then certain modifiers and transforms would be applied based on the geometry name.&lt;br&gt;
+&lt;img src=&quot;https://jmschrack.dev/img/IsolationFubar2.png&quot; alt=&quot;alt text&quot; title=&quot;Isolation partially correct&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Thankfully, geometry falls into two catergories of terrain or instances, so in the end it all worked out.&lt;br&gt;
+&lt;img src=&quot;https://jmschrack.dev/img/IsolationFixedGeo.png&quot; alt=&quot;alt text&quot; title=&quot;Isolation slightly less messed up&quot;&gt;&lt;br&gt;
+...But what&#39;s up with the crushed blacks?&lt;/p&gt;
 &lt;h2 id=&quot;materials&quot;&gt;Materials &lt;a class=&quot;direct-link&quot; href=&quot;#materials&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;The AMF file format has data in it for setting up textures and materials into the shaders. Every material has an array of textures, colors, and normal maps. Unfortunately the 3DS importer script does not support anything other than a basic diffuse set up. However, looking at the textures referenced, the AMF file would preserve indexes and leave in null fields. So a pattern can be observed with what texture indexes are albedo, normals, color change, and lighting.&lt;/p&gt;
+&lt;p&gt;The AMF file format has data in it for setting up textures and materials into the shaders. Every material has an array of textures, colors, and normal maps. Unfortunately the 3DS importer script does not support anything other than a basic diffuse set up. However, looking at the textures referenced, the AMF file would preserve indexes and leave in null fields. So a pattern can be observed with what texture indexes are albedo, normals, color change, and lighting.&lt;br&gt;
+That get&#39;s us about 75% of the way there, but we still have these weird, crushed black looking materials.&lt;br&gt;
+&lt;img src=&quot;https://jmschrack.dev/img/crushedBlackRock.png&quot; alt=&quot;alt text&quot; title=&quot;Rocks with Crushed Black&quot;&gt;&lt;br&gt;
+That ends up being an easy fix.  The textures have been pre-converted to linear colorspace, but by default Unity (and everything else) imports the texture as Gamma and then converts to linear. So changing the texture&#39;s sRGB setting to false fixed the colors and gets shadows to play nice as well!&lt;br&gt;
+&lt;img src=&quot;https://jmschrack.dev/img/RocksInShade.png&quot; alt=&quot;alt text&quot; title=&quot;Fixed rocks&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;rigged-importing&quot;&gt;Rigged Importing &lt;a class=&quot;direct-link&quot; href=&quot;#rigged-importing&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;It even works with rigged meshes, but that was whole other process of figuring out the right transforms to apply at certain steps. I saved a few screenshots of the more interesting steps in the process.&lt;/p&gt;
+&lt;p&gt;The correct skeleton is on the left. That wadded up ball of lines? That&#39;s the imported skeleton.&lt;br&gt;
+&lt;img src=&quot;https://jmschrack.dev/img/MCRig1.png&quot; alt=&quot;alt text&quot; title=&quot;Wadded up ball of skeleton&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Skeleton is looking right, except it took a long walk off a short cliff.&lt;br&gt;
+&lt;img src=&quot;https://jmschrack.dev/img/MCRig2.png&quot; alt=&quot;alt text&quot; title=&quot;Skeleton sleeping on the job&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Skeleton is right, but the 3D mesh is not?&lt;br&gt;
+&lt;img src=&quot;https://jmschrack.dev/img/MCRig3.png&quot; alt=&quot;alt text&quot; title=&quot;Almost there&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Skeleton and mesh imports properly, except a basic idle animation results in MasterChief about to drop the hottest rap album of 2020.&lt;br&gt;
+&lt;img src=&quot;https://jmschrack.dev/img/MCRigAnim1.gif&quot; alt=&quot;alt text&quot; title=&quot;MC is bit too gangsta&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Easy enough, adjusting MC to be in a T-Pose corrects the avatar&#39;s limb rotations.&lt;br&gt;
+&lt;img src=&quot;https://jmschrack.dev/img/MCRigAnimFinal.gif&quot; alt=&quot;alt text&quot; title=&quot;perfect&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;the-end-result&quot;&gt;The End Result &lt;a class=&quot;direct-link&quot; href=&quot;#the-end-result&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;Is a pretty servicable importer for AMF files into Unity! It&#39;s not perfect, but neither is AMF.&lt;/p&gt;
+&lt;p&gt;The full source code is on GitHub:&lt;br&gt;
+&lt;a href=&quot;https://github.com/jmschrack/Unity3D-AMFImporter&quot;&gt;https://github.com/jmschrack/Unity3D-AMFImporter&lt;/a&gt;&lt;/p&gt;
 </content>
 	</entry>
 	
