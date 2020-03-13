@@ -26,11 +26,12 @@ Huge shoutout to Shelley and the rest of the folks over on the Reclaimers discor
 ![alt text]( {{ '/img/IsolationFubar.png' | url }} "Isolation messed up")
 
 ## Geometry
+Huge thanks to Kim Duran & Hunter Gore for helping me with matrix transform math!
 
 Halo/3DS uses a right handed, z-up coordinate system, while Unity uses a left-handed Y-up system.  Converting between the two ended up being slightly trickier than it should have been. As the coordinates would be extracted from the raw AMF file, but then certain modifiers and transforms would be applied based on the geometry name. 
 ![alt text]( {{ '/img/IsolationFubar2.png' | url }} "Isolation partially correct")
 
-Thankfully, geometry falls into two catergories of terrain or instances, so in the end it all worked out.
+Thankfully, geometry falls into two catergories of terrain or instances.
 ![alt text]( {{ '/img/IsolationFixedGeo.png' | url }} "Isolation slightly less messed up")
 ...But what's up with the crushed blacks?
 
