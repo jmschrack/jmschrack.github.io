@@ -65,7 +65,8 @@ Easy enough, adjusting MC to be in a T-Pose corrects the avatar's limb rotations
 Is a pretty servicable importer for AMF files into Unity! It's not perfect, but neither is AMF. 
 
 The full source code is on GitHub:
-https://github.com/jmschrack/Unity3D-AMFImporter 
+<div class="github-card" data-github="jmschrack/Unity3D-AMFImporter" data-width="400" data-height="153" data-theme="default"></div>
+<script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
 
 # Wait what about that Render test?
 4 player splitscreen hit max frame rate 30FPS on an android tablet. (Screen is locked at VSync. Judging by the CPU stats, it could feasible hit 50+FPS without VSync)
