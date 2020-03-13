@@ -81,7 +81,7 @@ I developed the core game systems built to Justin&#39;s specifications, includin
 &lt;p&gt;Having invisible platforms is not a novel idea in video games. The logical progression is a tool or item that reveals the platforms.&lt;br&gt;
 For an example from Super Mario Galaxy:&lt;br&gt;
 &lt;img src=&quot;https://jmschrack.dev/img/smg_invisplat.gif&quot; alt=&quot;alt text&quot; title=&quot;SMG Invis Platform example&quot;&gt;&lt;/p&gt;
-&lt;p&gt;The first obvious use case for a 2 player game, is that Player1 controls the tool to reveal the platforms that Player2 has to use.&lt;/p&gt;
+&lt;p&gt;The obvious use case for a 2 player game, is that Player1 controls the tool to reveal the platforms that Player2 has to use.&lt;/p&gt;
 &lt;h2 id=&quot;the-twist&quot;&gt;The Twist &lt;a class=&quot;direct-link&quot; href=&quot;#the-twist&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;I really wish we could make the collisions operate the same way as the visuals. - &lt;em&gt;Justin Palmer&lt;/em&gt;, &lt;em&gt;Mend&#39;s Game Designer&lt;/em&gt;&lt;/p&gt;
