@@ -18,15 +18,33 @@
 		<updated>2019-02-04T00:00:00-00:00</updated>
 		<id>https://jmschrack.dev/posts/UnityAMFImporter/</id>
 		<content type="html">&lt;h1 id=&quot;wip&quot;&gt;WIP &lt;a class=&quot;direct-link&quot; href=&quot;#wip&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;h2 id=&quot;down-the-rabbit-hole...&quot;&gt;Down the rabbit hole... &lt;a class=&quot;direct-link&quot; href=&quot;#down-the-rabbit-hole...&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I wanted to test the efficiency of rendering a FPS multiplayer map on some low end hardware. So I started to make a map when I realized, why waste time on a theoretical map, when I could use an existing map from an FPS? Then I recalled that I used to play a lot of Halo:CE in college.  Not &amp;quot;Combat Evolved&amp;quot; but &amp;quot;&lt;em&gt;Custom Edition&lt;/em&gt;&amp;quot;.&lt;/p&gt;
+&lt;p&gt;Custom Edition had tools that allowed the community to create custom levels, maps, guns, etc. But I didn&#39;t want to use someone else&#39; map; I wanted to use one of the official maps as a benchmark for my performance test. So I did some research and came across a fan made tool called &amp;quot;Adjutant&amp;quot; that lets you extract geometry and textures from the Halo map files. Even better it supported Halo 3 assets! So I open up &amp;quot;Isolation&amp;quot; multiplayer map from Halo 3. Extract the textures as PNGs and extract the model as... AMF?&lt;/p&gt;
+&lt;p&gt;So the Adjutant mod team had created their own model file format to extract as.  They then provided an import script plugin for 3DS...2005.  I don&#39;t own 3DS Max, much less the older precursor. So I started investigating if anyone had made a Blender plugin that could import AMF.  No one had. Most of the documentation and mod posts I was finding for Halo:CE were circa 2003 at best. However, by chance I ran across a forum post dated late 2018 of someone talking about making a Blender plugin.&lt;/p&gt;
+&lt;p&gt;Huge shoutout to Shelley and the rest of the folks over on the Reclaimers discord. Shelley had a decompiled version of the 3DS importer plugin. With this, I was able to write my own C# importer to allow Unity to import AMF files natively as if they were 3D models! ...almost.&lt;/p&gt;
+&lt;p&gt;(photo of jacked up isolation)&lt;/p&gt;
+&lt;h2 id=&quot;geometry&quot;&gt;Geometry &lt;a class=&quot;direct-link&quot; href=&quot;#geometry&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Halo/3DS uses a right handed, z-up coordinate system, while Unity uses a left-handed Y-up system.  Converting between the two ended up being slightly trickier than it should have been. As the coordinates would be extracted from the raw AMF file, but then certain modifiers and transforms would be applied based on the geometry name.&lt;/p&gt;
+&lt;h2 id=&quot;materials&quot;&gt;Materials &lt;a class=&quot;direct-link&quot; href=&quot;#materials&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The AMF file format has data in it for setting up textures and materials into the shaders. Every material has an array of textures, colors, and normal maps. Unfortunately the 3DS importer script does not support anything other than a basic diffuse set up. However, looking at the textures referenced, the AMF file would preserve indexes and leave in null fields. So a pattern can be observed with what texture indexes are albedo, normals, color change, and lighting.&lt;/p&gt;
 </content>
 	</entry>
 	
 	<entry>
-		<title>BLE 4 Unity</title>
+		<title>BTLE 4 Unity</title>
 		<link href="https://jmschrack.dev/posts/BLE4Unity/"/>
 		<updated>2019-02-28T00:00:00-00:00</updated>
 		<id>https://jmschrack.dev/posts/BLE4Unity/</id>
-		<content type="html">&lt;h1 id=&quot;wip&quot;&gt;WIP &lt;a class=&quot;direct-link&quot; href=&quot;#wip&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
+		<content type="html">&lt;p&gt;&lt;img src=&quot;https://jmschrack.dev/img/BTLE4Unity.jpg&quot; alt=&quot;alt text&quot; title=&quot;BTLE4Unity Title Card&quot;&gt;&lt;/p&gt;
+&lt;p&gt;I designed and developed a Bluetooth Low Energy integration for Unity!&lt;br&gt;
+Nicknamed BTLE4Unity aka &amp;quot;Beetle&amp;quot;&lt;/p&gt;
+&lt;p&gt;The asset is broken into multiple parts for cross platform utilization.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Core API: this is the high level interface that all platforms must implement&lt;/li&gt;
+&lt;li&gt;Win API: this wraps the low level Windows SDK Bluetooth calls with C# headers and utilities.&lt;/li&gt;
+&lt;li&gt;WebGL API: this wraps the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Web_Bluetooth_API&quot;&gt;Javascript Bluetooth implementation&lt;/a&gt; spec via JSLIB bindings.&lt;/li&gt;
+&lt;/ul&gt;
 </content>
 	</entry>
 	
