@@ -52,8 +52,9 @@ That ends up being an easy fix.  The textures have been pre-converted to linear 
 &lt;img src=&quot;https://jmschrack.dev/img/MCRigAnimFinal.gif&quot; alt=&quot;alt text&quot; title=&quot;perfect&quot;&gt;&lt;/p&gt;
 &lt;h1 id=&quot;the-end-result&quot;&gt;The End Result &lt;a class=&quot;direct-link&quot; href=&quot;#the-end-result&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;Is a pretty servicable importer for AMF files into Unity! It&#39;s not perfect, but neither is AMF.&lt;/p&gt;
-&lt;p&gt;The full source code is on GitHub:&lt;br&gt;
-&lt;a href=&quot;https://github.com/jmschrack/Unity3D-AMFImporter&quot;&gt;https://github.com/jmschrack/Unity3D-AMFImporter&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The full source code is on GitHub:&lt;/p&gt;
+&lt;div class=&quot;github-card&quot; data-github=&quot;jmschrack/Unity3D-AMFImporter&quot; data-width=&quot;400&quot; data-height=&quot;153&quot; data-theme=&quot;default&quot;&gt;&lt;/div&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/github-cards/latest/widget.js&quot;&gt;&lt;/script&gt;
 &lt;h1 id=&quot;wait-what-about-that-render-test%3F&quot;&gt;Wait what about that Render test? &lt;a class=&quot;direct-link&quot; href=&quot;#wait-what-about-that-render-test%3F&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;4 player splitscreen hit max frame rate 30FPS on an android tablet. (Screen is locked at VSync. Judging by the CPU stats, it could feasible hit 50+FPS without VSync)&lt;/p&gt;
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/7W2QDMUuvdY&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
