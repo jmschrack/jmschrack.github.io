@@ -40,10 +40,10 @@ ___Dictionary of Terms___
 
 ## Inspiration
 Having invisible platforms is not a novel idea in video games. The logical progression is a tool or item that reveals the platforms.
-For an example from Super Mario Galaxy:
+For an example from Super Mario Odyssey:
 ![alt text]( {{ '/img/smg_invisplat.gif' | url }} "SMG Invis Platform example")
 
-The obvious use case for a 2 player game, is that Player1 controls the tool to reveal the platforms that Player2 has to use.
+The obvious use case for a 2 player game, is that Player1 controls the tool to reveal the platforms that Player2 has to use. However, it didn't mesh at first with our use case.
 
 
 ## The Twist
