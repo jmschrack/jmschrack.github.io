@@ -17,4 +17,11 @@ eleventyNavigation:
 {% set postslistCounter = collections.portfolio | length %}
 {% include "showcase.njk" %}
 
+<div class="w3-container" style="margin-top:80px" id="showcase">
+			<h1 class="w3-xxxlarge w3-text-red"><b>Latest Blog Posts</b></h1>
+			<hr style="width:50px;border:5px solid red" class="w3-round">
+		</div>
+{% set postslist = collections.blog | head(-3) %}
+{% set postslistCounter = collections.blog | length %}
+{% include "postslist.njk" %}
 <p>More posts can be found in <a href="{{ '/posts/' | url }}">the archive</a>.</p>
