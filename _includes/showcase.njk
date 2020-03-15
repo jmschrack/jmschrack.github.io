@@ -4,7 +4,7 @@
   
   {% if loop.index%2!=0%}
   {% if post.data.card %}
-  <a href="{{ post.url | url }}"><img src="{{post.data.card | url }}" style= "width:100%;max-width:100%"/> </a>
+  <a href="{{ post.url | url }}"><img src="{{post.data.card | url }}" style= "width:100%;max-width:100%;"/> </a>
   {% endif %}
   {% endif %}
 {% endfor %}
