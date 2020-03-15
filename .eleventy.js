@@ -13,6 +13,11 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(pluginNavigation);
   //eleventyConfig.addPlugin(embedYouTube);
 
+  eleventyConfig.addCollection("oddNumber", function(collection){
+    console.log(collection.getAll());
+    return collection.getAll();
+  });
+
   eleventyConfig.setDataDeepMerge(true);
 
   eleventyConfig.addLayoutAlias("post", "layouts/post.njk");

@@ -9,7 +9,7 @@ tags:
   - XR
   - Oculus
 layout: layouts/post.njk
-titlecard: img/Mend_400x400.jpg
+card: img/Mend_400x400.jpg
 ---
 
 ![alt text]( {{ '/img/Mend_400x400.jpg' | url }} "Mend Title Card")

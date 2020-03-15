@@ -6,6 +6,7 @@ tags:
   - portfolio
   - Unity3D
 layout: layouts/post.njk
+card: '/img/BTLE4Unity.jpg'
 ---
 
 
