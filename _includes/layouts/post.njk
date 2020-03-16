@@ -6,7 +6,7 @@ templateClass: tmpl-post
 <div class="w3-container" style="margin-top:80px" id="showcase">
 			<h1 class="w3-xxxlarge w3-text-red"><b>{{ title }}</b></h1>
 			
-			<hr style="width:50px;border:5px solid red" class="w3-round"><time class="postlist-date" datetime="{{ post.date | htmlDateString }}">{{ date | readableDate }}</time> </h1>
+			<hr style="width:50px;border:5px solid red" class="w3-round">{%- if date -%} <time class="postlist-date" datetime="{{ post.date | htmlDateString }}">{{ date | readableDate }}</time>{%- endif -%} </h1>
 		</div>
 
 {{ content | safe }}
