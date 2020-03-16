@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tagged “portfolio”</title>
-    <meta name="Description" content="Jonathan Schrack">
+    <title>Sanity Razor</title>
+    <meta name="Description" content="Unreleased VR title for the Oculus DK2">
 	<!-- <link rel="stylesheet" href="/css/index.css"> -->
 	<link rel="stylesheet" href="/css/w3.css">
 	<!--  -->
@@ -40,62 +40,33 @@ body {font-size:16px;}
 	
 	<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 	
-    <main class="tmpl-home w3-main" style="margin-left:340px;margin-right:40px">
+    <main class="tmpl-post w3-main" style="margin-left:340px;margin-right:40px">
 		
 		<div class="w3-container">
-			<h1>Tagged “portfolio”</h1>
+			<h1></h1>
+<div class="w3-container" style="margin-top:80px" id="showcase">
+			<h1 class="w3-xxxlarge w3-text-red"><b>Sanity Razor</b></h1>
+			<hr style="width:50px;border:5px solid red" class="w3-round">
+		</div>
+<p>This was the first project I worked on at Digital Precept. Development was on a Oculus DK2 and Unity5. The game is best described as &quot;Steel Batallion vs Call of Cthulhu.&quot;<br>
+It was first demoed at PAX:South 2016 with great praise from the players who tried it.<br>
+However, this was still the halcyon days of VR development and our basic training demo was pushing the system to its limits to hit 90FPS, and so the studio made the decision to stop working on it.</p>
+<p>The project is not considered cancelled as the studio would like to revisit the idea in the future.</p>
+<blockquote>
+<p>&quot;That is not dead which can eternal lie. And with strange aeons even death may die.&quot; - <em>Call of Cthulhu</em></p>
+</blockquote>
+<h2 id="the-greenlight-trailer">The Greenlight Trailer <a class="direct-link" href="#the-greenlight-trailer">#</a></h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/UsRlwK7xg_s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<h1 id="novel-features">Novel features <a class="direct-link" href="#novel-features">#</a></h1>
+<p><em>At time of writing, it's 2020. Many of these features are trivial or easy now that the XR industry has had 4 years to mature.</em></p>
+<p>We had a monoscopic HUD that only rendered on your left eye. This allowed use to render targeting pips for ease of aiming and enemy awareness.<br>
+Dual camera setups in Unity3D were prohibitively expensive, and we didn't want to deal with &quot;impossible geometry&quot; by rendering the HUD as floating 3D elements.</p>
+<p>The simple solution:  render it like a real world HUD. The Entirety of the HUD is rendered roughly 1.5 inches to the left of the camera's center point. Or roughly 1 inch in front of your (virtual) eyeball.<br>
+The SinglePass Stereo translation math would naturally occlude this from the right eye.<br>
+Furthermore, there is only one world space canvas with all elements including the cockpit displays attached to it. This keeps all the UI drawcalls to a single batch.</p>
 
 
-<ol reversed class="postlist" style="counter-reset: start-from 5">
-
-  <li class="postlist-item">
-    <a href="/posts/Mend/" class="postlist-link">Mend</a>
-    
-    <time class="postlist-date" datetime="2020-02-10">10 Feb 2020</time>
-    
-      <a href="/tags/portfolio/" class="tag">portfolio</a>
-      <a href="/tags/games/" class="tag">games</a>
-      <a href="/tags/Unity3D/" class="tag">Unity3D</a>
-      <a href="/tags/XR/" class="tag">XR</a>
-      <a href="/tags/Oculus/" class="tag">Oculus</a>
-  </li>
-
-  <li class="postlist-item">
-    <a href="/posts/BLE4Unity/" class="postlist-link">BTLE 4 Unity</a>
-    
-    <time class="postlist-date" datetime="2019-02-28">28 Feb 2019</time>
-    
-      <a href="/tags/portfolio/" class="tag">portfolio</a>
-      <a href="/tags/Unity3D/" class="tag">Unity3D</a>
-  </li>
-
-  <li class="postlist-item">
-    <a href="/posts/UnityAMFImporter/" class="postlist-link">Unity3D AMF-Importer</a>
-    
-    <time class="postlist-date" datetime="2019-02-04">04 Feb 2019</time>
-    
-      <a href="/tags/blog/" class="tag">blog</a>
-      <a href="/tags/portfolio/" class="tag">portfolio</a>
-      <a href="/tags/Unity3D/" class="tag">Unity3D</a>
-      <a href="/tags/github/" class="tag">github</a>
-  </li>
-
-  <li class="postlist-item">
-    <a href="/posts/SanityRazor/" class="postlist-link">Sanity Razor</a>
-    
-    <time class="postlist-date" datetime="2016-02-24">24 Feb 2016</time>
-    
-      <a href="/tags/portfolio/" class="tag">portfolio</a>
-      <a href="/tags/games/" class="tag">games</a>
-      <a href="/tags/Unity3D/" class="tag">Unity3D</a>
-      <a href="/tags/XR/" class="tag">XR</a>
-  </li>
-
-</ol>
-
-
-<p>See <a href="/tags/">all tags</a>.</p>
-
+<p><a href="/">← Home</a></p>
 
 		</div>
     </main>
@@ -119,6 +90,6 @@ function w3_close() {
   document.getElementById("myOverlay").style.display = "none";
 }
 </script>
-    <!-- Current page: /tags/portfolio/ -->
+    <!-- Current page: /posts/SanityRazor/ -->
   </body>
 </html>

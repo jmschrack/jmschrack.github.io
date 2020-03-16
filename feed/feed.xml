@@ -13,6 +13,30 @@
 	</author>
 	
 	<entry>
+		<title>Sanity Razor</title>
+		<link href="https://jmschrack.dev/posts/SanityRazor/"/>
+		<updated>2016-02-24T00:00:00-00:00</updated>
+		<id>https://jmschrack.dev/posts/SanityRazor/</id>
+		<content type="html">&lt;p&gt;This was the first project I worked on at Digital Precept. Development was on a Oculus DK2 and Unity5. The game is best described as &amp;quot;Steel Batallion vs Call of Cthulhu.&amp;quot;&lt;br&gt;
+It was first demoed at PAX:South 2016 with great praise from the players who tried it.&lt;br&gt;
+However, this was still the halcyon days of VR development and our basic training demo was pushing the system to its limits to hit 90FPS, and so the studio made the decision to stop working on it.&lt;/p&gt;
+&lt;p&gt;The project is not considered cancelled as the studio would like to revisit the idea in the future.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;quot;That is not dead which can eternal lie. And with strange aeons even death may die.&amp;quot; - &lt;em&gt;Call of Cthulhu&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;the-greenlight-trailer&quot;&gt;The Greenlight Trailer &lt;a class=&quot;direct-link&quot; href=&quot;#the-greenlight-trailer&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/UsRlwK7xg_s&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;h1 id=&quot;novel-features&quot;&gt;Novel features &lt;a class=&quot;direct-link&quot; href=&quot;#novel-features&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;em&gt;At time of writing, it&#39;s 2020. Many of these features are trivial or easy now that the XR industry has had 4 years to mature.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;We had a monoscopic HUD that only rendered on your left eye. This allowed use to render targeting pips for ease of aiming and enemy awareness.&lt;br&gt;
+Dual camera setups in Unity3D were prohibitively expensive, and we didn&#39;t want to deal with &amp;quot;impossible geometry&amp;quot; by rendering the HUD as floating 3D elements.&lt;/p&gt;
+&lt;p&gt;The simple solution:  render it like a real world HUD. The Entirety of the HUD is rendered roughly 1.5 inches to the left of the camera&#39;s center point. Or roughly 1 inch in front of your (virtual) eyeball.&lt;br&gt;
+The SinglePass Stereo translation math would naturally occlude this from the right eye.&lt;br&gt;
+Furthermore, there is only one world space canvas with all elements including the cockpit displays attached to it. This keeps all the UI drawcalls to a single batch.&lt;/p&gt;
+</content>
+	</entry>
+	
+	<entry>
 		<title>Unity3D AMF-Importer</title>
 		<link href="https://jmschrack.dev/posts/UnityAMFImporter/"/>
 		<updated>2019-02-04T00:00:00-00:00</updated>
