@@ -13,9 +13,9 @@ card: img/SanityRazor_GreenLightLogo.png
 
 This was the first project I worked on at Digital Precept. Development was on a Oculus DK2 and Unity5. The game is best described as "Steel Batallion vs Call of Cthulhu." 
 It was first demoed at PAX:South 2016 with great praise from the players who tried it.
-However, this was still the halcyon days of VR development and our basic training demo was pushing the system to its limits to hit 90FPS, and so the studio made the decision to stop working on it.
+However, this was still the halcyon days of VR development and our basic training demo was pushing the system to its limits to hit 90FPS, and so the studio made the decision to stop working on it for now.
 
-The project is not considered cancelled as the studio would like to revisit the idea in the future.
+The project is not considered cancelled as the studio would like to revisit the idea in the future; the project's status is "on ice."
 >"That is not dead which can eternal lie. And with strange aeons even death may die." - _Call of Cthulhu_
 
 ## The Greenlight Trailer
