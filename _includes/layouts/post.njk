@@ -5,8 +5,16 @@ templateClass: tmpl-post
 <h1></h1>
 <div class="w3-container" style="margin-top:80px" id="showcase">
 			<h1 class="w3-xxxlarge w3-text-red"><b>{{ title }}</b></h1>
-			<hr style="width:50px;border:5px solid red" class="w3-round">
+			
+			<hr style="width:50px;border:5px solid red" class="w3-round"><time class="postlist-date" datetime="{{ post.date | htmlDateString }}">{{ date | readableDate }}</time> </h1>
 		</div>
+
 {{ content | safe }}
 
+{% for tag in tags %}
+      {%- if collections.tagList.indexOf(tag) != -1 -%}
+      {% set tagUrl %}/tags/{{ tag }}/{% endset %}
+      <a href="{{ tagUrl | url }}" class="tag">{{ tag }}</a>
+      {%- endif -%}
+    {% endfor %}
 <p><a href="{{ '/' | url }}">← Home</a></p>
