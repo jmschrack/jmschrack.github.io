@@ -1,0 +1,24 @@
+<div class="w3-row-padding ">
+{% for post in postslist | reverse %}
+    {% if loop.index!=1 %}
+    {% if loop.index%3==1 %}
+    </div>
+    <div class="w3-row-padding ">
+    {% endif %}
+    {%endif%}
+    <div class="w3-col m4 w3-margin-bottom">
+    
+        <div class="w3-light-grey">
+            <img src="{{ post.data.card | url }}" style="width:100%" />
+            <div class="w3-container">
+                <h3> {{ post.data.title }}</h3>
+                <p class="w3-opacity"> <time class="postlist-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time></p>
+                <p>{{ post.data.description }}</p>
+                <a href="{{ post.url | url }}" class="postlist-link">Read More ></a>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+

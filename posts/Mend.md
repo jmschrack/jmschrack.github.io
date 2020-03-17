@@ -1,6 +1,6 @@
 ---
 title: Mend
-description: 
+description: "A 2 player, asymetrical co-op game for VR."
 date: 2020-02-10
 tags:
   - portfolio
@@ -9,7 +9,7 @@ tags:
   - XR
   - Oculus
 layout: layouts/post.njk
-card: img/Mend_400x400.jpg
+card: /img/Mend_400x400.jpg
 ---
 
 ![alt text]( {{ '/img/Mend_400x400.jpg' | url }} "Mend Title Card")

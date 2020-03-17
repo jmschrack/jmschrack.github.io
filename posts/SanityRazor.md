@@ -8,7 +8,7 @@ tags:
   - Unity3D
   - XR
 layout: layouts/post.njk
-card: img/SanityRazor_GreenLightLogo.png
+card: /img/SanityRazor_GreenLightLogo.png
 ---
 
 This was the first project I worked on at Digital Precept. Development was on a Oculus DK2 and Unity5. The game is best described as "Steel Batallion vs Call of Cthulhu." 
