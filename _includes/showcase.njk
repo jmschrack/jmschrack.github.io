@@ -4,7 +4,12 @@
   
   {% if loop.index%2!=0%}
   {% if post.data.card %}
-  <a href="{{ post.url | url }}"><img src="{{post.data.card | url }}" style= "width:100%;max-width:100%;"/> </a>
+  <div class="imgbox">
+    <a href="{{ post.url | url }}"><img src="{{post.data.card | url }}" style= "width:100%;max-width:100%;"/> </a>
+  </div>
+  <div class="imgBoxContent" style="opacity:0">
+    <h1></h1>
+  </div>
   {% endif %}
   {% endif %}
 {% endfor %}
@@ -19,7 +24,7 @@
   <a href="{{ post.url | url }}"><img src="{{post.data.card | url }}" style= "width:100%;max-width:100%"/> </a>
   </div>
   <div class="imgBoxContent" style="opacity:0">
-  <h1>{{post.data.title}}</h1>
+  <h1></h1>
   </div>
   {% endif %}
   {% endif %}
