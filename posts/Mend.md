@@ -15,7 +15,7 @@ card: /img/Mend_400x400.jpg
 ![alt text]( {{ '/img/Mend_400x400.jpg' | url }} "Mend Title Card")
 
 I am the main XR and Software Developer for Mend!   
-Mend is a 2 player, asymetrical co-op game for VR.  It is designed by Justin Palmer and was originally an Oculus LaunchPad title.
+Mend is a 2 player, asymetrical co-op game for VR.  It is designed by [Justin Palmer](http://jeplmr.com/) and was originally an Oculus LaunchPad title.
 I developed the core game systems built to Justin's specifications, including:
   - an XR Interaction Rig we use that abstracts object usage logic away from the core VR camera rig. 
      - "Grab & Pull" locomotion keyed to the hand controller update sequence for as smooth as possible movement
