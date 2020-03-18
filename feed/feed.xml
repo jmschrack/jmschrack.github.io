@@ -109,7 +109,7 @@ Nicknamed BTLE4Unity aka &amp;quot;Beetle&amp;quot;&lt;/p&gt;
 		<id>https://jmschrack.dev/posts/Mend/</id>
 		<content type="html">&lt;p&gt;&lt;img src=&quot;https://jmschrack.dev/img/Mend_400x400.jpg&quot; alt=&quot;alt text&quot; title=&quot;Mend Title Card&quot;&gt;&lt;/p&gt;
 &lt;p&gt;I am the main XR and Software Developer for Mend!&lt;br&gt;
-Mend is a 2 player, asymetrical co-op game for VR.  It is designed by Justin Palmer and was originally an Oculus LaunchPad title.&lt;br&gt;
+Mend is a 2 player, asymetrical co-op game for VR.  It is designed by &lt;a href=&quot;http://jeplmr.com/&quot;&gt;Justin Palmer&lt;/a&gt; and was originally an Oculus LaunchPad title.&lt;br&gt;
 I developed the core game systems built to Justin&#39;s specifications, including:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;an XR Interaction Rig we use that abstracts object usage logic away from the core VR camera rig.
