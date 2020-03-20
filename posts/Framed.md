@@ -8,10 +8,10 @@ tags:
   - Unity3D
   - XR
 layout: layouts/post.njk
-card: /img/FRAMED.jpg
+card: /img/FramedBoseAR.png
 ---
 
-![alt text]( {{ '/img/FRAMED.jpg' | url }} "Framed Title Card")
+![alt text]( {{ '/img/FramedBoseAR.png' | url }} "Framed Title Card")
 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/hheEyIiuwrM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
