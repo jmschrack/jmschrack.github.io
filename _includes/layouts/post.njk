@@ -8,8 +8,9 @@ templateClass: tmpl-post
 			
 			<hr style="width:50px;border:5px solid red" class="w3-round">{%- if date -%} <time class="postlist-date" datetime="{{ post.date | htmlDateString }}">{{ date | readableDate }}</time>{%- endif -%} </h1>
 		</div>
-
+<div class="w3-container">
 {{ content | safe }}
+</div>
 
 {% for tag in tags %}
       {%- if collections.tagList.indexOf(tag) != -1 -%}
