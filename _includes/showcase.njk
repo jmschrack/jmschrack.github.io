@@ -1,17 +1,12 @@
-<div class="w3-row-padding">
+{# <div class="w3-row-padding">
 <div class="w3-half">
 {% for post in postslist | reverse %}
   
   {% if loop.index%2!=0%}
   {% if post.data.card %}
-  {# <div class="box">
-    <div class="imgBx"> #}
+  
       <a href="{{ post.url | url }}"><img src="{{post.data.card | url }}" style= "width:100%;max-width:100%"/> </a>
-    {# </div>
-    <div class="imgBxContent" style="opacity:1">
-      <h1>{{ post.data.title }}</h1>
-    </div>
-  </div> #}
+    
   {% endif %}
   {% endif %}
 {% endfor %}
@@ -22,15 +17,29 @@
   
   {% if loop.index%2==0%}
   {% if post.data.card %}
-  {# <div class="imgbox"> #}
+  
   <a href="{{ post.url | url }}"><img src="{{post.data.card | url }}" style= "width:100%;max-width:100%"/> </a>
-  {# </div>
-  <div class="imgBoxContent" style="opacity:0">
-  <h1></h1>
-  </div> #}
+  
   {% endif %}
   {% endif %}
 {% endfor %}
 </div>
 </div>
 
+ #}
+<style>
+.flex-container {
+  display: flex;
+  flex-direction: row;
+   flex-wrap: wrap;
+}
+</style>
+
+
+<div class="flex-container">
+  {% for post in postslist | reverse %}
+  <div class="w3-half">
+    <a href="{{ post.url | url }}"><img src="{{post.data.card | url}}" style="width:100%;max-width:100%;padding: 0 8px"/></a>
+  </div>
+  {% endfor %}
+</div> 
