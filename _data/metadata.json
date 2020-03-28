@@ -11,5 +11,9 @@
   "author": {
     "name": "Jonathan Schrack",
     "email": "jonathan.schrack@digitalprecept.com"
+  },
+  "social":{
+    "linkedin":"https://www.linkedin.com/in/jonathan-schrack/",
+    "twitter" : "https://twitter.com/jmschrack"
   }
 }
