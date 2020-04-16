@@ -39,7 +39,7 @@
 <div class="flex-container">
   {% for post in postslist | reverse %}
   <div class="w3-half">
-    <a href="{{ post.url | url }}"><img src="{{post.data.card | url}}" style="width:100%;max-width:100%;padding: 0 8px"/></a>
+    <a href="{{ post.url | url }}"><img src="{{post.data.card | url}}" style="width:100%;max-width:100%;padding: 0 8px" alt="{{post.data.title}}"/></a>
   </div>
   {% endfor %}
 </div> 
