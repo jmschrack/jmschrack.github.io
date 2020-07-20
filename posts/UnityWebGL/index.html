@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unleash the power of WebGL and Unity</title>
+    <meta name="Description" content="How to do callbacks in Unity WebGL and other tricks">
+	<!-- <link rel="stylesheet" href="/css/index.css"> -->
+	<link rel="stylesheet" href="/css/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!--  -->
+    
+    <link rel="stylesheet" href="/css/prism-base16-monokai.dark.css"> 
+	
+    <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Jonathan Schrack">
+	<link rel="icon" type="image/png" href="/img/favicon.ico">
+  </head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
+body {font-size:16px;}
+.w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
+.w3-half img:hover{opacity:1}
+</style>
+  <body>
+    <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar">
+	<a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
+      <div class="w3-padding-64"><h1 class="home">Jonathan Schrack</h1></div>
+      <ul class="w3-bar-block">
+        <li class="nav-item " ><a class="w3-bar-item w3-button w3-hover-white" href="/">Home</a></li>
+        <li class="nav-item " ><a class="w3-bar-item w3-button w3-hover-white" href="/portfolio/">Portfolio</a></li>
+        <li class="nav-item " ><a class="w3-bar-item w3-button w3-hover-white" href="/about/">About Me</a></li>
+        <li class="nav-item " ><a class="w3-bar-item w3-button w3-hover-white" href="/posts/">Archive</a></li>
+      </ul>
+    </nav>
+	
+	<header class="w3-container w3-top w3-hide-large w3-red w3-xlarge w3-padding">
+	  <a href="javascript:void(0)" class="w3-button w3-red w3-margin-right" onclick="w3_open()">☰</a>
+	  <span>Jonathan Schrack</span>
+	</header>
+	
+	<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+	
+    <main class="tmpl-post w3-main" style="margin-left:340px;margin-right:40px">
+		
+		<div class="w3-container">
+			<h1></h1>
+<div class="w3-container" style="margin-top:80px" id="showcase">
+			<h1 class="w3-xxxlarge w3-text-red"><b>Unleash the power of WebGL and Unity</b></h1>
+			
+			<hr style="width:50px;border:5px solid red" class="w3-round"><time class="postlist-date" datetime="Invalid DateTime">20 Jul 2020</time></h1>
+		</div>
+<div class="w3-container">
+<p>If you've ever used Javascript, you know how much it loves callbacks. Unfortunately at the time of writing, there isn't any good documentation on how to work with javascript callbacks inside of Unity's WebGL builds with C#.</p>
+<p>Note: Web browsers only run Javascript or WebASM.  However, in Unity we code in C# which then gets compiled and converted to WebASM, and in order to avoid confusion, I'll often refer to things as C# instead of WebASM.</p>
+<blockquote>
+<p>If you're coming from Unity and C# with little Javascript experience, you might have heard callbacks referred to as &quot;delegates&quot; or &quot;Actions.&quot;  Still not ringing a bell?  If you've used a UI button in Unity, the &quot;OnClick&quot; field is a callback!</p>
+</blockquote>
+<h1 id="how-to-use-c%23-callbacks-from-javascript">How to use C# Callbacks from Javascript <a class="direct-link" href="#how-to-use-c%23-callbacks-from-javascript">#</a></h1>
+<h2 id="on-the-c%23-side">On the C# side <a class="direct-link" href="#on-the-c%23-side">#</a></h2>
+<p>This is pretty straight forward for C# as the runtime will automatically marshal data for us.  &quot;Marshalling&quot; is the term for converting the data to another format and is necessary as we pass data from C# (technically WebASM) to Javascript and back.  Effectively, these two languages are isolated from each other in memory, but Interops allows these two transfer data and execution to and from each other.</p>
+<p>Let's look at a C# sample:<br>
+(JSAPI.cs)</p>
+<pre><code>using System;
+using System.Runtime.InteropServices;
+using AOT;
+public class JSAPI{
+    
+    [DllImport(&quot;__Internal&quot;)]
+    private static extern void JSExample(Action callback);
+
+    [MonoPInvokeCallback(typeof(Action))]
+    public static void DefaultCallback(){
+        //This fires from javascript
+    }
+
+    public void YourMethod(){
+        JSExample(DefaultCallback);
+    }
+}
+</code></pre>
+<p>Let's break this down:<br>
+We declare our Javascript function called &quot;JSExample&quot;  as taking an &quot;Action&quot; reference. This is our function pointer that will get passed to Javascript.</p>
+<p>We then declare a <strong>static</strong> function and mark it with <code>[MonoPInvokeCallback(typeof(Action))]</code> which as you can probably guess, will tell the compiler to generate a function pointer that matches type &quot;Action&quot;.  <em>(Why do we use a static callback function? We'll get to that later.)</em></p>
+<p>Lastly, we can then call the Javascript function and pass in our static callback.</p>
+<h2 id="on-the-javascript-side">On the Javascript side <a class="direct-link" href="#on-the-javascript-side">#</a></h2>
+<p>This is where things start to get tricky. Fortunately, it's a lot of boilerplate code.</p>
+<p>First off, to call a C# function from a Javascript function you want to use:</p>
+<pre><code>Runtime.dynCall(signature,functionPtr,arguments);
+</code></pre>
+<p><strong>signature</strong>: (string) return type followed by each argument type.</p>
+<p>v - void<br>
+i - int<br>
+f - float<br>
+d - double</p>
+<p>example:<br>
+<em>public static void SomeCallback(int id, string data)</em><br>
+has the signature string:<br>
+<em>&quot;vii&quot;</em><br>
+(Why do string parameters use int? We'll get to that...)</p>
+<p><strong>functionPtr</strong>: the C# function we want to call</p>
+<p><strong>arguments</strong>: (array) the parameters to pass to the C# function</p>
+<p>In practice, it looks like this:<br>
+(example.jslib)</p>
+<pre><code>mergeInto(LibraryManager.library, {
+    JSExample: function(functionPtr){
+        Runtime.dynCall(&quot;v&quot;,functionPtr,[]);
+    }
+});
+</code></pre>
+<blockquote>
+<p>Sanity Check:  Your Javascript function name must match what you called your static extern function in C#, in this case &quot;JSExample&quot;</p>
+</blockquote>
+<p>Seems simple so far?</p>
+<h1 id="strings-and-things">Strings and things <a class="direct-link" href="#strings-and-things">#</a></h1>
+<p>So what if we want to pass some strings back and forth? For example, we want to use the <a href="https://www.w3schools.com/jsref/met_win_prompt.asp">Javascript &quot;prompt()&quot; command</a> to get some text input from the user.  (Fun fact:  due to iOS security restrictions, this is currently the only way to get text input from iPads in Unity WebGL.)</p>
+<p>Prompt() takes a string as the message text, and optionally a second string as the default input text, it then returns the user's input (or null if they click cancel).</p>
+<p>Pretty simple in C#</p>
+<pre><code>[DllImport(&quot;__Internal&quot;)]
+private static extern string PromptText(string message, string text);
+</code></pre>
+<p>And in JS...</p>
+<pre><code>PromptText: function(titlePtr,textPtr){
+        var title=Pointer_stringify(titlePtr);
+        var text = Pointer_stringify(textPtr);
+        var val=prompt(title,text);
+        var buffer=0;
+        if(val){
+            var size=lengthBytesUTF8(val)+1;
+            buffer=_malloc(size);
+            stringToUTF8(val,buffer,size);
+        }
+        return buffer;
+    }
+</code></pre>
+<p>Yikes, that's a lot of code. Let's dive in!</p>
+<p>You can only pass primitive data types back and forth between C# and JS, and strings are not a primitive. Instead, the string is written to memory, and a pointer to that section of memory is passed to Javascript.  So we call &quot;Pointer_stringify&quot;  to fetch the string.</p>
+<p>When trying to pass the string from Javascript to C#, we do the same thing. We don't pass the string itself, but instead we copy the string to memory and then pass a pointer to that string back to C#.   &quot;_malloc&quot;  reserves a chunk of memory (aka &quot;buffer&quot;)  for us to copy our string into. We always use length+1 when reserving memory, as the last byte of a string is always 0x00 to signify the end of the data. &quot;stringToUTF8&quot;  does the actually copying for us.</p>
+<p>Keep in mind, that &quot;prompt()&quot; can return null. We handle this by checking &quot;if(val)&quot;  before copying the string. If they did click cancel, we just return 0, which C# will auto marshal as a null string.</p>
+<h2 id="scope-and-closures">Scope and Closures <a class="direct-link" href="#scope-and-closures">#</a></h2>
+<p>A pointer to a string passed in as a parameter will get included as the local scope of a closure.  However, the string this pointer refers to may not!  You should marshal any data you need before creating a closure.</p>
+<h2 id="what-about-other-objects%3F">What about other objects? <a class="direct-link" href="#what-about-other-objects%3F">#</a></h2>
+<p>While it is possible, it is a lot of extra work. In C# you have to use a &quot;struct&quot; with Explicit layout instead of a &quot;class.&quot;   In Javascript, you'll have to manually write data to the buffer to ensure it matches the C# struct <em>exactly</em>   as it would be laid out in memory.  Keep in mind, that javascript data types don't always match up to their C# counterparts.</p>
+<p><strong>OR</strong></p>
+<p>You could just use <code>JSON.stringify()</code> to easily convert your object to a string and then pass it across just like we did in the &quot;prompt()&quot; example above. Nice and easy.</p>
+<h1 id="using-non-static-callbacks">Using non-static callbacks <a class="direct-link" href="#using-non-static-callbacks">#</a></h1>
+<p>So remember earlier when we passed a static C# callback to Javascript?  That's a bit inconvenient. What if we just used a non-static callback?<br>
+You'll get the follow error in your Javscript console:</p>
+<pre><code>NotSupportedException: IL2CPP does not support marshaling delegates that point to instance methods to native code.
+</code></pre>
+<p>So you must use static delegates.  However, we know how to pass data back and forth, and now you can get around this limitation by building your own lookup table</p>
+<p>blah blah blah example code</p>
+
+</div>
+
+
+      <a href="/tags/tutorial/" class="tag">tutorial</a>
+      <a href="/tags/blog/" class="tag">blog</a>
+      <a href="/tags/Unity3D/" class="tag">Unity3D</a>
+      <a href="/tags/github/" class="tag">github</a>
+<p><a href="/">← Home</a></p>
+
+		</div>
+    </main>
+
+    <footer>
+      <div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px">
+	<p class="w3-right">
+	  Powered by <a href="https://www.11ty.dev/" title="11ty" target="_blank" rel="noopener" class="w3-hover-opacity">11ty</a> and <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" rel="noopener" class="w3-hover-opacity"> w3.css </a>
+	  </p>
+</div>
+    </footer>
+	<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+    <!-- Current page: /posts/UnityWebGL/ -->
+  </body>
+</html>
