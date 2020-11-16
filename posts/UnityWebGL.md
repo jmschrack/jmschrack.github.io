@@ -198,7 +198,8 @@ void ExampleUsage(){
 ```
 
 ## On the Javascript side
-We're going to make use of Emscripten's "__postset" command, which will emit a string directly into 
+We're going to make use of Emscripten's "__postset" command, which will emit a string directly into the resulting Javascript file.  In this case, we emit a scope level array to hold our JS callback references. In this simple example, we just pass the index of the callback to C#, and then use that index to invoke the callback later. 
+
 ``` js
 JSCallbackExample__postset:'var cbIDs=[];',
 JSCallbackExample: function(){
@@ -213,6 +214,8 @@ InvokeCallback: function(cb){
     callback();
 }
 ```
+
+> Heads Up:  This example does not remove callbacks after invoking them. If you need to use Javascript callbacks sparingly or if you reuse callbacks, this will probably be okay. However, if you need to invoke non-reusable JS callbacks frequently, this array will bloat up and waste memory. In the latter case, consider using a JS Object and generating unique keys instead.
 
 # Call external Javascript on the web page
 This is probably the easiest thing here. Your JSLibs are still JavaScript running in a web browser which means they follow normal conventions. As long as the external JS library you want to use is declared in a ```<script>``` tag before the script tag that loads your UnityInstance, it will be accessible.
