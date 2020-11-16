@@ -32,7 +32,7 @@ This is pretty straight forward for C# as the runtime will automatically marshal
 
 Let's look at a C# sample:
 (JSAPI.cs)
-```
+``` csharp
 using System;
 using System.Runtime.InteropServices;
 using AOT;
@@ -65,7 +65,7 @@ This is where things start to get tricky. Fortunately, it's a lot of boilerplate
 
 First off, to call a C# function from a Javascript function you want to use:
 
-```
+``` js
 Runtime.dynCall(signature,functionPtr,arguments);
 ```
 
@@ -88,7 +88,7 @@ __arguments__: (array) the parameters to pass to the C# function
 
 In practice, it looks like this:
 (example.jslib)
-```
+``` js
 var myLib={
     $dependencies:{},
     JSExample: function(functionPtr){
@@ -109,7 +109,7 @@ This could be a bit hacky. Unity uses "Emscripten" as part of it's toolchain to 
 
 ## On the Javascript side (Emscripten v1.38.26 or higher)
 This will look similar to what we did above.
-```
+``` js
 Runtime.addFunction(jsFunction,signature):IntPtr
 ```
 __jsFunction__: (function) The Javascript function you want to wrap as a C# method.
@@ -118,7 +118,7 @@ __return:IntPtr__: (int) the invokable pointer we can pass to C#.
 
 In practice, looks like this:
 (example.jslib)
-```
+``` js
 //adding this after JSExample above
 
     JSCallbackExample: function(){
@@ -133,7 +133,7 @@ In practice, looks like this:
 ## On the C# side
 
 It's also pretty straightforward on the C# side if you let it auto-marshal the pointer as a delegate.
-```
+``` cs
 [DllImport("__Internal")]
 private static extern Action JSCallbackExample();
 
@@ -144,8 +144,8 @@ void ExampleUsage(){
 ```
 
 You can also manually marshal it:
-
-```
+ 
+``` cs
 [DllImport("__Internal")]
 private static extern IntPtr JSCallbackExample();
 
@@ -161,7 +161,7 @@ public static Action GetJSCallback(){
 If you immediately tried to Build and run using your brand new JS Callbacks, you'll get a javascript error. Something along the lines of "Could not find function" or "ran out of table space"  in regards to the "addFunction" command. Emscripten keeps an internal table that maps C# delegates to Javascript functions, and by default this is created at build time and is unchangable. So we have to supply a custom argument to the Emscripten tool to enable runtime usage of 'addFunction.'  
 
 Create an Editor script and add these lines to it.
-```
+``` cs
 [MenuItem("Tools/Set WebGL Args")]
 static void SetWebGLArgs(){
     PlayerSettings.WebGL.emscriptenArgs="-s ALLOW_TABLE_GROWTH";
@@ -184,7 +184,7 @@ We simply create an array in Javascript, store our would-be Javascript functions
 
 ## On the C# side
 This is going to be almost identical to earlier, with the exception of an additional extern function we use for Invoking.
-```
+``` cs
 [DllImport("__Internal")]
 private static extern int JSCallbackExample();
 [DllImport("__Internal")]
@@ -199,7 +199,7 @@ void ExampleUsage(){
 
 ## On the Javascript side
 We're going to make use of Emscripten's "__postset" command, which will emit a string directly into 
-```
+``` js
 JSCallbackExample__postset:'var cbIDs=[];',
 JSCallbackExample: function(){
         var callback=function(){
@@ -218,7 +218,7 @@ InvokeCallback: function(cb){
 This is probably the easiest thing here. Your JSLibs are still JavaScript running in a web browser which means they follow normal conventions. As long as the external JS library you want to use is declared in a ```<script>``` tag before the script tag that loads your UnityInstance, it will be accessible.
 
 (index.html)
-```
+``` html
 <script>
 var TestExternalJS = function(){
     alert("I'm your external function!");
@@ -227,7 +227,7 @@ var TestExternalJS = function(){
 ```
 
 (example.jslib)
-```
+``` js
 var myLib={
     $dependencies:{},
     CallExternal: function(){
@@ -242,7 +242,7 @@ mergInto(LibraryManager.library,myLib);
 This last part is a combination of everything we've learned so far.  There are many ways to handle this; this is just my preferred style
 
 We create a new script tag to hold a global object. We give the tag an id for easy access later and a "isLoaded" variable for checking.
-```
+``` html
 <script id="UnityHooks">
 var UnityHooks={
     isLoaded:false
@@ -251,7 +251,7 @@ var UnityHooks={
 ```
 
 In our JSLib, we add functions to our global object.  It's a good idea to marshal and cache any data you need.   We finish by setting isLoaded to true, and firing a "loaded" event on the script tag itself.  This will allow any external APIs that depend on our Unity hooks to use the standard EventListener system
-```
+``` js
 SetUpHooks:function(callback){
         UnityHooks.cb=callback;
         UnityHooks.TestCallback=function(text){
@@ -279,7 +279,7 @@ You could just use JSON to easily convert your object(s) to a string and then pa
 ## Using non-static callbacks
 So remember earlier when we passed a static C# callback to Javascript?  That's a bit inconvenient. What if we just used a non-static callback?
 You'll get the this error in your Javscript console:
-```
+``` text
 NotSupportedException: IL2CPP does not support marshaling delegates that point to instance methods to native code.
 ```
 So you must use static delegates.  However, you can create a look up table to cache these local delegates and just pass an ID value and a static delegate to the Javascript.  This is the exact same logic we used in [Pass a Javascript callback to C# (Older versions of Emscripten)](#pass-a-javascript-callback-to-c%23-(older-versions-of-emscripten)) except now you handle it on the C# side instead of the Javascript side.

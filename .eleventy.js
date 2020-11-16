@@ -9,12 +9,12 @@ const markdownItAnchor = require("markdown-it-anchor");
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
-  eleventyConfig.addPlugin(pluginSyntaxHighlight);
+  eleventyConfig.addPlugin(pluginSyntaxHighlight,{lineSeparator:'\n'});
   eleventyConfig.addPlugin(pluginNavigation);
   //eleventyConfig.addPlugin(embedYouTube);
-
+ 
   eleventyConfig.addCollection("oddNumber", function(collection){
-    console.log(collection.getAll());
+    //console.log(collection.getAll());
     return collection.getAll();
   });
 
@@ -56,7 +56,7 @@ module.exports = function(eleventyConfig) {
     permalinkSymbol: "#"
   });
   eleventyConfig.setLibrary("md", markdownLibrary);
-
+ 
   // Browsersync Overrides
   eleventyConfig.setBrowserSyncConfig({
     callbacks: {
