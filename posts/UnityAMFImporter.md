@@ -8,7 +8,7 @@ tags:
   - Unity3D
   - github
 layout: layouts/post.njk
-card:  '/img/AMFImporter.png'
+card: /img/AMFImporterCard.png
 ---
 
 ![alt text]( {{ '/img/AMFImporter.png' | url }} "Adjutant to Unity")
