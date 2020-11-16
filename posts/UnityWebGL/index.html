@@ -8,6 +8,7 @@
 	<!-- <link rel="stylesheet" href="/css/index.css"> -->
 	<link rel="stylesheet" href="/css/w3.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
 	<!--  -->
     
     <link rel="stylesheet" href="/css/prism-base16-monokai.dark.css"> 
@@ -44,19 +45,30 @@ body {font-size:16px;}
     <main class="tmpl-post w3-main" style="margin-left:340px;margin-right:40px">
 		
 		<div class="w3-container">
-			<h1></h1>
+			<script src="https://unpkg.com/browse/prismjs@1.22.0/components/prism-core.min.js"></script>
+	<script src="https://unpkg.com/browse/prismjs@1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
+<h1></h1>
 <div class="w3-container" style="margin-top:80px" id="showcase">
 			<h1 class="w3-xxxlarge w3-text-red"><b>Unleash the power of WebGL and Unity</b></h1>
 			
 			<hr style="width:50px;border:5px solid red" class="w3-round"><time class="postlist-date" datetime="Invalid DateTime">20 Jul 2020</time></h1>
 		</div>
 <div class="w3-container">
-<p>If you've ever used Javascript, you know how much it loves callbacks. Unfortunately at the time of writing, there isn't any good documentation on how to work with javascript callbacks inside of Unity's WebGL builds with C#.</p>
-<p>Note: Web browsers only run Javascript or WebASM.  However, in Unity we code in C# which then gets compiled and converted to WebASM, and in order to avoid confusion, I'll often refer to things as C# instead of WebASM.</p>
+<p><a href="https://docs.unity3d.com/Manual/webgl-interactingwithbrowserscripting.html">Here's Unity's current documentation on interacting with Javascript</a><br>
+This covers basic function calling and marshalling strings, but what about callbacks? If you've ever used Javascript, you know how much it loves callbacks. Unfortunately at the time of writing, there isn't any good documentation on how to work with javascript callbacks inside of Unity's WebGL builds with C#. So let's fix that.</p>
 <blockquote>
 <p>If you're coming from Unity and C# with little Javascript experience, you might have heard callbacks referred to as &quot;delegates&quot; or &quot;Actions.&quot;  Still not ringing a bell?  If you've used a UI button in Unity, the &quot;OnClick&quot; field is a callback!</p>
 </blockquote>
-<h1 id="how-to-use-c%23-callbacks-from-javascript">How to use C# Callbacks from Javascript <a class="direct-link" href="#how-to-use-c%23-callbacks-from-javascript">#</a></h1>
+<h1 id="topics">Topics <a class="direct-link" href="#topics">#</a></h1>
+<ul>
+<li><a href="#pass-a-c%23-callback-to-javascript">Pass a C# callback to Javascript</a></li>
+<li><a href="#pass-a-javascript-callback-to-c%23">Pass a Javascript callback to C#</a></li>
+<li><a href="#call-external-javascript-on-the-web-page">Call external Javascript on the web page.</a></li>
+<li><a href="#creating-global-hooks-for-external-javascript-to-use">Creating global hooks for external Javascript to use</a></li>
+<li><a href="#wrapping-up">Common Pitfalls</a></li>
+</ul>
+<p>Note: Web browsers only run Javascript or WebASM.  However, in Unity we code in C# which then gets compiled and converted to WebASM, and in order to avoid confusion, I'll often refer to things as C# instead of WebASM.</p>
+<h1 id="pass-a-c%23-callback-to-javascript">Pass a C# callback to Javascript <a class="direct-link" href="#pass-a-c%23-callback-to-javascript">#</a></h1>
 <h2 id="on-the-c%23-side">On the C# side <a class="direct-link" href="#on-the-c%23-side">#</a></h2>
 <p>This is pretty straight forward for C# as the runtime will automatically marshal data for us.  &quot;Marshalling&quot; is the term for converting the data to another format and is necessary as we pass data from C# (technically WebASM) to Javascript and back.  Effectively, these two languages are isolated from each other in memory, but Interops allows these two transfer data and execution to and from each other.</p>
 <p>Let's look at a C# sample:<br>
@@ -97,59 +109,173 @@ d - double</p>
 <em>public static void SomeCallback(int id, string data)</em><br>
 has the signature string:<br>
 <em>&quot;vii&quot;</em><br>
-(Why do string parameters use int? We'll get to that...)</p>
+(Why do string parameters use int? Because we copy the string to C# memory and then pass the pointer in. C# will auto-marshal this as a string for us!)</p>
 <p><strong>functionPtr</strong>: the C# function we want to call</p>
 <p><strong>arguments</strong>: (array) the parameters to pass to the C# function</p>
 <p>In practice, it looks like this:<br>
 (example.jslib)</p>
-<pre><code>mergeInto(LibraryManager.library, {
+<pre><code>var myLib={
+    $dependencies:{},
     JSExample: function(functionPtr){
         Runtime.dynCall(&quot;v&quot;,functionPtr,[]);
     }
-});
+};
+autoAddDeps(myLib,'$dependencies');
+mergInto(LibraryManager.library,myLib);
+
 </code></pre>
 <blockquote>
 <p>Sanity Check:  Your Javascript function name must match what you called your static extern function in C#, in this case &quot;JSExample&quot;</p>
 </blockquote>
 <p>Seems simple so far?</p>
-<h1 id="strings-and-things">Strings and things <a class="direct-link" href="#strings-and-things">#</a></h1>
-<p>So what if we want to pass some strings back and forth? For example, we want to use the <a href="https://www.w3schools.com/jsref/met_win_prompt.asp">Javascript &quot;prompt()&quot; command</a> to get some text input from the user.  (Fun fact:  due to iOS security restrictions, this is currently the only way to get text input from iPads in Unity WebGL.)</p>
-<p>Prompt() takes a string as the message text, and optionally a second string as the default input text, it then returns the user's input (or null if they click cancel).</p>
-<p>Pretty simple in C#</p>
-<pre><code>[DllImport(&quot;__Internal&quot;)]
-private static extern string PromptText(string message, string text);
+<h1 id="pass-a-javascript-callback-to-c%23">Pass a Javascript callback to C# <a class="direct-link" href="#pass-a-javascript-callback-to-c%23">#</a></h1>
+<p>This could be a bit hacky. Unity uses &quot;Emscripten&quot; as part of it's toolchain to convert your C# to WASM. As of Jan2019, a helper function was added to Emscripten that wraps a Javascript function as invokable method pointers. However, depending on your version of Unity, you may or may not have that update. We'll cover that first, but if you are stuck on an older version, we'll cover how to DIY your own workaround.</p>
+<h2 id="on-the-javascript-side-(emscripten-v1.38.26-or-higher)">On the Javascript side (Emscripten v1.38.26 or higher) <a class="direct-link" href="#on-the-javascript-side-(emscripten-v1.38.26-or-higher)">#</a></h2>
+<p>This will look similar to what we did above.</p>
+<pre><code>Runtime.addFunction(jsFunction,signature):IntPtr
 </code></pre>
-<p>And in JS...</p>
-<pre><code>PromptText: function(titlePtr,textPtr){
-        var title=Pointer_stringify(titlePtr);
-        var text = Pointer_stringify(textPtr);
-        var val=prompt(title,text);
-        var buffer=0;
-        if(val){
-            var size=lengthBytesUTF8(val)+1;
-            buffer=_malloc(size);
-            stringToUTF8(val,buffer,size);
-        }
-        return buffer;
+<p><strong>jsFunction</strong>: (function) The Javascript function you want to wrap as a C# method.<br>
+<strong>signature</strong>: (string) return type followed by each argument type. This follows the same rules as dynCall mentioned above.<br>
+<strong>return:IntPtr</strong>: (int) the invokable pointer we can pass to C#.</p>
+<p>In practice, looks like this:<br>
+(example.jslib)</p>
+<pre><code>//adding this after JSExample above
+
+    JSCallbackExample: function(){
+        var callback=function(){
+            alert(&quot;Received a callback!&quot;);
+        };
+        var ptr=Runtime.addFunction(callback,'v');
+        return ptr;
     }
 </code></pre>
-<p>Yikes, that's a lot of code. Let's dive in!</p>
-<p>You can only pass primitive data types back and forth between C# and JS, and strings are not a primitive. Instead, the string is written to memory, and a pointer to that section of memory is passed to Javascript.  So we call &quot;Pointer_stringify&quot;  to fetch the string.</p>
-<p>When trying to pass the string from Javascript to C#, we do the same thing. We don't pass the string itself, but instead we copy the string to memory and then pass a pointer to that string back to C#.   &quot;_malloc&quot;  reserves a chunk of memory (aka &quot;buffer&quot;)  for us to copy our string into. We always use length+1 when reserving memory, as the last byte of a string is always 0x00 to signify the end of the data. &quot;stringToUTF8&quot;  does the actually copying for us.</p>
-<p>Keep in mind, that &quot;prompt()&quot; can return null. We handle this by checking &quot;if(val)&quot;  before copying the string. If they did click cancel, we just return 0, which C# will auto marshal as a null string.</p>
+<h2 id="on-the-c%23-side-2">On the C# side <a class="direct-link" href="#on-the-c%23-side-2">#</a></h2>
+<p>It's also pretty straightforward on the C# side if you let it auto-marshal the pointer as a delegate.</p>
+<pre><code>[DllImport(&quot;__Internal&quot;)]
+private static extern Action JSCallbackExample();
+
+void ExampleUsage(){
+    Action a = JSCallbackExample();
+    a.Invoke();
+}
+</code></pre>
+<p>You can also manually marshal it:</p>
+<pre><code>[DllImport(&quot;__Internal&quot;)]
+private static extern IntPtr JSCallbackExample();
+
+public static Action GetJSCallback(){
+    IntPtr ptr= JSCallbackExample();
+    Action a= Marshal.GetDelegateForFunctionPointer&lt;Action&gt;(ptr);
+    return a;
+}
+
+</code></pre>
+<h2 id="on-the-unity-side">On The Unity side <a class="direct-link" href="#on-the-unity-side">#</a></h2>
+<p>If you immediately tried to Build and run using your brand new JS Callbacks, you'll get a javascript error. Something along the lines of &quot;Could not find function&quot; or &quot;ran out of table space&quot;  in regards to the &quot;addFunction&quot; command. Emscripten keeps an internal table that maps C# delegates to Javascript functions, and by default this is created at build time and is unchangable. So we have to supply a custom argument to the Emscripten tool to enable runtime usage of 'addFunction.'</p>
+<p>Create an Editor script and add these lines to it.</p>
+<pre><code>[MenuItem(&quot;Tools/Set WebGL Args&quot;)]
+static void SetWebGLArgs(){
+    PlayerSettings.WebGL.emscriptenArgs=&quot;-s ALLOW_TABLE_GROWTH&quot;;
+}
+[MenuItem(&quot;Tools/Unset WebGL Args&quot;)]
+static void SetWebGLArgs(){
+    PlayerSettings.WebGL.emscriptenArgs=&quot;&quot;;
+}
+
+</code></pre>
+<p>This will add a &quot;Tools&quot; submenu to Unity and allow you to change the WebGL arguments sent to Emscripten.<br>
+Just run &quot;Tools/Set WebGL Args&quot; once and that's it. Now you should be able to build and use the AddFunction command</p>
+<blockquote>
+<p>If you fail to build with a &quot;FILE NOT FOUND 'ALLOW_TABLE_GROWTH'&quot; error, that means you are on an older version of Emscripten that does not have this ability. Don't panic.</p>
+</blockquote>
+<h1 id="pass-a-javascript-callback-to-c%23-(older-versions-of-emscripten)">Pass a Javascript callback to C# (Older versions of Emscripten) <a class="direct-link" href="#pass-a-javascript-callback-to-c%23-(older-versions-of-emscripten)">#</a></h1>
+<p>As mentioned before, Emscripten keeps an internal table of what C# delegates map to which Javascript functions. Unfortunately if you are on an older version of Emscripten, you can't add to this table dynamically. There is an easy, if less elegant, solution:  write our own lookup table in Javascript.</p>
+<p>We simply create an array in Javascript, store our would-be Javascript functions, pass their index to C#, and then call a Javascript function with that index which fires the JS callback for us.</p>
+<h2 id="on-the-c%23-side-3">On the C# side <a class="direct-link" href="#on-the-c%23-side-3">#</a></h2>
+<p>This is going to be almost identical to earlier, with the exception of an additional extern function we use for Invoking.</p>
+<pre><code>[DllImport(&quot;__Internal&quot;)]
+private static extern int JSCallbackExample();
+[DllImport(&quot;__Internal&quot;)]
+private static extern void InvokeCallback(int cb);
+
+void ExampleUsage(){
+    int cb=JSCallbackExample();
+    //do something.....
+    InvokeCallback(cb);
+}
+</code></pre>
+<h2 id="on-the-javascript-side-2">On the Javascript side <a class="direct-link" href="#on-the-javascript-side-2">#</a></h2>
+<p>We're going to make use of Emscripten's &quot;__postset&quot; command, which will emit a string directly into</p>
+<pre><code>JSCallbackExample__postset:'var cbIDs=[];',
+JSCallbackExample: function(){
+        var callback=function(){
+            alert(&quot;Received a callback!&quot;);
+        };
+        var id=cbIDs.push(callback)-1;
+        return id;
+    },
+InvokeCallback: function(cb){
+    var callback=cbIDs[cb];
+    callback();
+}
+</code></pre>
+<h1 id="call-external-javascript-on-the-web-page">Call external Javascript on the web page <a class="direct-link" href="#call-external-javascript-on-the-web-page">#</a></h1>
+<p>This is probably the easiest thing here. Your JSLibs are still JavaScript running in a web browser which means they follow normal conventions. As long as the external JS library you want to use is declared in a <code>&lt;script&gt;</code> tag before the script tag that loads your UnityInstance, it will be accessible.</p>
+<p>(index.html)</p>
+<pre><code>&lt;script&gt;
+var TestExternalJS = function(){
+    alert(&quot;I'm your external function!&quot;);
+}
+&lt;/script&gt;
+</code></pre>
+<p>(example.jslib)</p>
+<pre><code>var myLib={
+    $dependencies:{},
+    CallExternal: function(){
+        TestExternalJS();
+    }
+};
+autoAddDeps(myLib,'$dependencies');
+mergInto(LibraryManager.library,myLib);
+</code></pre>
+<h1 id="creating-global-hooks-for-external-javascript-to-use">Creating global hooks for external Javascript to use <a class="direct-link" href="#creating-global-hooks-for-external-javascript-to-use">#</a></h1>
+<p>This last part is a combination of everything we've learned so far.  There are many ways to handle this; this is just my preferred style</p>
+<p>We create a new script tag to hold a global object. We give the tag an id for easy access later and a &quot;isLoaded&quot; variable for checking.</p>
+<pre><code>&lt;script id=&quot;UnityHooks&quot;&gt;
+var UnityHooks={
+    isLoaded:false
+}
+&lt;/script&gt;
+</code></pre>
+<p>In our JSLib, we add functions to our global object.  It's a good idea to marshal and cache any data you need.   We finish by setting isLoaded to true, and firing a &quot;loaded&quot; event on the script tag itself.  This will allow any external APIs that depend on our Unity hooks to use the standard EventListener system</p>
+<pre><code>SetUpHooks:function(callback){
+        UnityHooks.cb=callback;
+        UnityHooks.TestCallback=function(text){
+            var bufferSize = lengthBytesUTF8(text) + 1;
+            var buffer = _malloc(bufferSize);
+            stringToUTF8(text, buffer, bufferSize);
+            Runtime.dynCall('vi',UnityHooks.cb,[buffer]);
+        }
+        UnityHooks.isLoaded=true;
+        document.getElementById('UnityHooks').dispatchEvent(new Event('loaded'));
+    }
+</code></pre>
+<h1 id="wrapping-up">Wrapping Up <a class="direct-link" href="#wrapping-up">#</a></h1>
+<p>I believe this covers the missing edge cases in the official Unity documentation. Here's a few common pitfalls I've run across that are worth mentioning.</p>
 <h2 id="scope-and-closures">Scope and Closures <a class="direct-link" href="#scope-and-closures">#</a></h2>
-<p>A pointer to a string passed in as a parameter will get included as the local scope of a closure.  However, the string this pointer refers to may not!  You should marshal any data you need before creating a closure.</p>
-<h2 id="what-about-other-objects%3F">What about other objects? <a class="direct-link" href="#what-about-other-objects%3F">#</a></h2>
-<p>While it is possible, it is a lot of extra work. In C# you have to use a &quot;struct&quot; with Explicit layout instead of a &quot;class.&quot;   In Javascript, you'll have to manually write data to the buffer to ensure it matches the C# struct <em>exactly</em>   as it would be laid out in memory.  Keep in mind, that javascript data types don't always match up to their C# counterparts.</p>
-<p><strong>OR</strong></p>
-<p>You could just use <code>JSON.stringify()</code> to easily convert your object to a string and then pass it across just like we did in the &quot;prompt()&quot; example above. Nice and easy.</p>
-<h1 id="using-non-static-callbacks">Using non-static callbacks <a class="direct-link" href="#using-non-static-callbacks">#</a></h1>
+<p>A pointer to a string passed in as a parameter will get included as the local scope of a closure.  However, the string this pointer refers to may not!  You should marshal any data you need before creating a closure in Javascript.</p>
+<h2 id="what-about-passing-objects%3F">What about passing objects? <a class="direct-link" href="#what-about-passing-objects%3F">#</a></h2>
+<p>While it is possible, it is a lot of extra work on the Javascript side as there is no automatic Marshalling in Javascript. In C#, you have to use a &quot;struct&quot; with Explicit layout instead of a &quot;class&quot; when you want to pass data to and from Javascript. In Javascript, you'll have to read/write bytes to a data buffer manually to recreate the data object.<br>
+<strong>OR</strong><br>
+You could just use JSON to easily convert your object(s) to a string and then pass it across. Nice and easy as both Javascript and UnityC# have built in JSON parsers, but this comes at the cost of some extra memory.</p>
+<h2 id="using-non-static-callbacks">Using non-static callbacks <a class="direct-link" href="#using-non-static-callbacks">#</a></h2>
 <p>So remember earlier when we passed a static C# callback to Javascript?  That's a bit inconvenient. What if we just used a non-static callback?<br>
-You'll get the follow error in your Javscript console:</p>
+You'll get the this error in your Javscript console:</p>
 <pre><code>NotSupportedException: IL2CPP does not support marshaling delegates that point to instance methods to native code.
 </code></pre>
-<p>So you must use static delegates.  However, we know how to pass data back and forth, and now you can get around this limitation by building your own lookup table</p>
-<p>blah blah blah example code</p>
+<p>So you must use static delegates.  However, you can create a look up table to cache these local delegates and just pass an ID value and a static delegate to the Javascript.  This is the exact same logic we used in <a href="#pass-a-javascript-callback-to-c%23-(older-versions-of-emscripten)">Pass a Javascript callback to C# (Older versions of Emscripten)</a> except now you handle it on the C# side instead of the Javascript side.</p>
+<p>I wrote a simple <a href="https://gist.github.com/jmschrack/4d1451a0914f210cbe481bcf176891ea">ActionLookUpTable gist on Github</a> that will work for general Interops. It was built with multi-threading in mind, but it won't compile on WebGL unless you remove the System.Threading imports. However, multi-threading isn't an issue on WebGL so it's an easy remove.</p>
+<p>Good luck!</p>
 
 </div>
 
