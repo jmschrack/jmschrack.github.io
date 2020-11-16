@@ -252,24 +252,23 @@ This covers basic function calling and marshalling strings, but what about callb
 &lt;p&gt;This is pretty straight forward for C# as the runtime will automatically marshal data for us.  &amp;quot;Marshalling&amp;quot; is the term for converting the data to another format and is necessary as we pass data from C# (technically WebASM) to Javascript and back.  Effectively, these two languages are isolated from each other in memory, but Interops allows these two transfer data and execution to and from each other.&lt;/p&gt;
 &lt;p&gt;Let&#39;s look at a C# sample:&lt;br&gt;
 (JSAPI.cs)&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;using System;
-using System.Runtime.InteropServices;
-using AOT;
-public class JSAPI{
+&lt;pre class=&quot;language-csharp&quot;&gt;&lt;code class=&quot;language-csharp&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;token namespace&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;token namespace&quot;&gt;System&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;Runtime&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;InteropServices&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;token namespace&quot;&gt;AOT&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;JSAPI&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
     
-    [DllImport(&amp;quot;__Internal&amp;quot;)]
-    private static extern void JSExample(Action callback);
+    &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token attribute&quot;&gt;&lt;span class=&quot;token class-name&quot;&gt;DllImport&lt;/span&gt;&lt;span class=&quot;token attribute-arguments&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;__Internal&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;extern&lt;/span&gt; &lt;span class=&quot;token return-type class-name&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;JSExample&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;Action&lt;/span&gt; callback&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 
-    [MonoPInvokeCallback(typeof(Action))]
-    public static void DefaultCallback(){
-        //This fires from javascript
-    }
+    &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token attribute&quot;&gt;&lt;span class=&quot;token class-name&quot;&gt;MonoPInvokeCallback&lt;/span&gt;&lt;span class=&quot;token attribute-arguments&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;typeof&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token type-expression class-name&quot;&gt;Action&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token return-type class-name&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;DefaultCallback&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;//This fires from javascript&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
-    public void YourMethod(){
-        JSExample(DefaultCallback);
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;token return-type class-name&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;YourMethod&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token function&quot;&gt;JSExample&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;DefaultCallback&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Let&#39;s break this down:&lt;br&gt;
 We declare our Javascript function called &amp;quot;JSExample&amp;quot;  as taking an &amp;quot;Action&amp;quot; reference. This is our function pointer that will get passed to Javascript.&lt;/p&gt;
 &lt;p&gt;We then declare a &lt;strong&gt;static&lt;/strong&gt; function and mark it with &lt;code&gt;[MonoPInvokeCallback(typeof(Action))]&lt;/code&gt; which as you can probably guess, will tell the compiler to generate a function pointer that matches type &amp;quot;Action&amp;quot;.  &lt;em&gt;(Why do we use a static callback function? We&#39;ll get to that later.)&lt;/em&gt;&lt;/p&gt;
@@ -277,8 +276,7 @@ We declare our Javascript function called &amp;quot;JSExample&amp;quot;  as taki
 &lt;h2 id=&quot;on-the-javascript-side&quot;&gt;On the Javascript side &lt;a class=&quot;direct-link&quot; href=&quot;#on-the-javascript-side&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;This is where things start to get tricky. Fortunately, it&#39;s a lot of boilerplate code.&lt;/p&gt;
 &lt;p&gt;First off, to call a C# function from a Javascript function you want to use:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Runtime.dynCall(signature,functionPtr,arguments);
-&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;Runtime&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;dynCall&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;signature&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;functionPtr&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;arguments&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;strong&gt;signature&lt;/strong&gt;: (string) return type followed by each argument type.&lt;/p&gt;
 &lt;p&gt;v - void&lt;br&gt;
 i - int&lt;br&gt;
@@ -293,15 +291,14 @@ has the signature string:&lt;br&gt;
 &lt;p&gt;&lt;strong&gt;arguments&lt;/strong&gt;: (array) the parameters to pass to the C# function&lt;/p&gt;
 &lt;p&gt;In practice, it looks like this:&lt;br&gt;
 (example.jslib)&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var myLib={
-    $dependencies:{},
-    JSExample: function(functionPtr){
-        Runtime.dynCall(&amp;quot;v&amp;quot;,functionPtr,[]);
-    }
-};
-autoAddDeps(myLib,&#39;$dependencies&#39;);
-mergInto(LibraryManager.library,myLib);
-
+&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; myLib&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    $dependencies&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token function-variable function&quot;&gt;JSExample&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;functionPtr&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        Runtime&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;dynCall&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;v&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;functionPtr&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;autoAddDeps&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;myLib&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;$dependencies&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;mergInto&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;LibraryManager&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;library&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;myLib&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Sanity Check:  Your Javascript function name must match what you called your static extern function in C#, in this case &amp;quot;JSExample&amp;quot;&lt;/p&gt;
@@ -311,56 +308,51 @@ mergInto(LibraryManager.library,myLib);
 &lt;p&gt;This could be a bit hacky. Unity uses &amp;quot;Emscripten&amp;quot; as part of it&#39;s toolchain to convert your C# to WASM. As of Jan2019, a helper function was added to Emscripten that wraps a Javascript function as invokable method pointers. However, depending on your version of Unity, you may or may not have that update. We&#39;ll cover that first, but if you are stuck on an older version, we&#39;ll cover how to DIY your own workaround.&lt;/p&gt;
 &lt;h2 id=&quot;on-the-javascript-side-(emscripten-v1.38.26-or-higher)&quot;&gt;On the Javascript side (Emscripten v1.38.26 or higher) &lt;a class=&quot;direct-link&quot; href=&quot;#on-the-javascript-side-(emscripten-v1.38.26-or-higher)&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;This will look similar to what we did above.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Runtime.addFunction(jsFunction,signature):IntPtr
-&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;Runtime&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;addFunction&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;jsFunction&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;signature&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;IntPtr&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;strong&gt;jsFunction&lt;/strong&gt;: (function) The Javascript function you want to wrap as a C# method.&lt;br&gt;
 &lt;strong&gt;signature&lt;/strong&gt;: (string) return type followed by each argument type. This follows the same rules as dynCall mentioned above.&lt;br&gt;
 &lt;strong&gt;return:IntPtr&lt;/strong&gt;: (int) the invokable pointer we can pass to C#.&lt;/p&gt;
 &lt;p&gt;In practice, looks like this:&lt;br&gt;
 (example.jslib)&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;//adding this after JSExample above
+&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;//adding this after JSExample above&lt;/span&gt;
 
-    JSCallbackExample: function(){
-        var callback=function(){
-            alert(&amp;quot;Received a callback!&amp;quot;);
-        };
-        var ptr=Runtime.addFunction(callback,&#39;v&#39;);
-        return ptr;
-    }
-&lt;/code&gt;&lt;/pre&gt;
+    &lt;span class=&quot;token function-variable function&quot;&gt;JSCallbackExample&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;token function&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Received a callback!&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; ptr&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;Runtime&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;addFunction&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;callback&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;v&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; ptr&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&quot;on-the-c%23-side-2&quot;&gt;On the C# side &lt;a class=&quot;direct-link&quot; href=&quot;#on-the-c%23-side-2&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;It&#39;s also pretty straightforward on the C# side if you let it auto-marshal the pointer as a delegate.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[DllImport(&amp;quot;__Internal&amp;quot;)]
-private static extern Action JSCallbackExample();
+&lt;pre class=&quot;language-cs&quot;&gt;&lt;code class=&quot;language-cs&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token attribute&quot;&gt;&lt;span class=&quot;token class-name&quot;&gt;DllImport&lt;/span&gt;&lt;span class=&quot;token attribute-arguments&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;__Internal&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;extern&lt;/span&gt; &lt;span class=&quot;token return-type class-name&quot;&gt;Action&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;JSCallbackExample&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 
-void ExampleUsage(){
-    Action a = JSCallbackExample();
-    a.Invoke();
-}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;span class=&quot;token return-type class-name&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;ExampleUsage&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token class-name&quot;&gt;Action&lt;/span&gt; a &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;JSCallbackExample&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    a&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Invoke&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;You can also manually marshal it:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[DllImport(&amp;quot;__Internal&amp;quot;)]
-private static extern IntPtr JSCallbackExample();
+&lt;pre class=&quot;language-cs&quot;&gt;&lt;code class=&quot;language-cs&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token attribute&quot;&gt;&lt;span class=&quot;token class-name&quot;&gt;DllImport&lt;/span&gt;&lt;span class=&quot;token attribute-arguments&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;__Internal&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;extern&lt;/span&gt; &lt;span class=&quot;token return-type class-name&quot;&gt;IntPtr&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;JSCallbackExample&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 
-public static Action GetJSCallback(){
-    IntPtr ptr= JSCallbackExample();
-    Action a= Marshal.GetDelegateForFunctionPointer&amp;lt;Action&amp;gt;(ptr);
-    return a;
-}
-
+&lt;span class=&quot;token keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token return-type class-name&quot;&gt;Action&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;GetJSCallback&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token class-name&quot;&gt;IntPtr&lt;/span&gt; ptr&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;JSCallbackExample&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token class-name&quot;&gt;Action&lt;/span&gt; a&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; Marshal&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token generic-method&quot;&gt;&lt;span class=&quot;token function&quot;&gt;GetDelegateForFunctionPointer&lt;/span&gt;&lt;span class=&quot;token generic class-name&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;Action&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;ptr&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; a&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&quot;on-the-unity-side&quot;&gt;On The Unity side &lt;a class=&quot;direct-link&quot; href=&quot;#on-the-unity-side&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;If you immediately tried to Build and run using your brand new JS Callbacks, you&#39;ll get a javascript error. Something along the lines of &amp;quot;Could not find function&amp;quot; or &amp;quot;ran out of table space&amp;quot;  in regards to the &amp;quot;addFunction&amp;quot; command. Emscripten keeps an internal table that maps C# delegates to Javascript functions, and by default this is created at build time and is unchangable. So we have to supply a custom argument to the Emscripten tool to enable runtime usage of &#39;addFunction.&#39;&lt;/p&gt;
 &lt;p&gt;Create an Editor script and add these lines to it.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[MenuItem(&amp;quot;Tools/Set WebGL Args&amp;quot;)]
-static void SetWebGLArgs(){
-    PlayerSettings.WebGL.emscriptenArgs=&amp;quot;-s ALLOW_TABLE_GROWTH&amp;quot;;
-}
-[MenuItem(&amp;quot;Tools/Unset WebGL Args&amp;quot;)]
-static void SetWebGLArgs(){
-    PlayerSettings.WebGL.emscriptenArgs=&amp;quot;&amp;quot;;
-}
-
+&lt;pre class=&quot;language-cs&quot;&gt;&lt;code class=&quot;language-cs&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token attribute&quot;&gt;&lt;span class=&quot;token class-name&quot;&gt;MenuItem&lt;/span&gt;&lt;span class=&quot;token attribute-arguments&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Tools/Set WebGL Args&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token return-type class-name&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;SetWebGLArgs&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    PlayerSettings&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;WebGL&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;emscriptenArgs&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;-s ALLOW_TABLE_GROWTH&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token attribute&quot;&gt;&lt;span class=&quot;token class-name&quot;&gt;MenuItem&lt;/span&gt;&lt;span class=&quot;token attribute-arguments&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Tools/Unset WebGL Args&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token return-type class-name&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;SetWebGLArgs&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    PlayerSettings&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;WebGL&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;emscriptenArgs&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This will add a &amp;quot;Tools&amp;quot; submenu to Unity and allow you to change the WebGL arguments sent to Emscripten.&lt;br&gt;
 Just run &amp;quot;Tools/Set WebGL Args&amp;quot; once and that&#39;s it. Now you should be able to build and use the AddFunction command&lt;/p&gt;
@@ -372,73 +364,67 @@ Just run &amp;quot;Tools/Set WebGL Args&amp;quot; once and that&#39;s it. Now yo
 &lt;p&gt;We simply create an array in Javascript, store our would-be Javascript functions, pass their index to C#, and then call a Javascript function with that index which fires the JS callback for us.&lt;/p&gt;
 &lt;h2 id=&quot;on-the-c%23-side-3&quot;&gt;On the C# side &lt;a class=&quot;direct-link&quot; href=&quot;#on-the-c%23-side-3&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;This is going to be almost identical to earlier, with the exception of an additional extern function we use for Invoking.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[DllImport(&amp;quot;__Internal&amp;quot;)]
-private static extern int JSCallbackExample();
-[DllImport(&amp;quot;__Internal&amp;quot;)]
-private static extern void InvokeCallback(int cb);
+&lt;pre class=&quot;language-cs&quot;&gt;&lt;code class=&quot;language-cs&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token attribute&quot;&gt;&lt;span class=&quot;token class-name&quot;&gt;DllImport&lt;/span&gt;&lt;span class=&quot;token attribute-arguments&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;__Internal&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;extern&lt;/span&gt; &lt;span class=&quot;token return-type class-name&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;int&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;JSCallbackExample&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token attribute&quot;&gt;&lt;span class=&quot;token class-name&quot;&gt;DllImport&lt;/span&gt;&lt;span class=&quot;token attribute-arguments&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;__Internal&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;extern&lt;/span&gt; &lt;span class=&quot;token return-type class-name&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;InvokeCallback&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;int&lt;/span&gt;&lt;/span&gt; cb&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 
-void ExampleUsage(){
-    int cb=JSCallbackExample();
-    //do something.....
-    InvokeCallback(cb);
-}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;span class=&quot;token return-type class-name&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;ExampleUsage&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token class-name&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;int&lt;/span&gt;&lt;/span&gt; cb&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;JSCallbackExample&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;//do something.....&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;InvokeCallback&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;cb&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&quot;on-the-javascript-side-2&quot;&gt;On the Javascript side &lt;a class=&quot;direct-link&quot; href=&quot;#on-the-javascript-side-2&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;We&#39;re going to make use of Emscripten&#39;s &amp;quot;__postset&amp;quot; command, which will emit a string directly into&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;JSCallbackExample__postset:&#39;var cbIDs=[];&#39;,
-JSCallbackExample: function(){
-        var callback=function(){
-            alert(&amp;quot;Received a callback!&amp;quot;);
-        };
-        var id=cbIDs.push(callback)-1;
-        return id;
-    },
-InvokeCallback: function(cb){
-    var callback=cbIDs[cb];
-    callback();
-}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;JSCallbackExample__postset&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;var cbIDs=[];&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token function-variable function&quot;&gt;JSCallbackExample&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;token function&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Received a callback!&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; id&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;cbIDs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;callback&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; id&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token function-variable function&quot;&gt;InvokeCallback&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;cb&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; callback&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;cbIDs&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;cb&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;h1 id=&quot;call-external-javascript-on-the-web-page&quot;&gt;Call external Javascript on the web page &lt;a class=&quot;direct-link&quot; href=&quot;#call-external-javascript-on-the-web-page&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;This is probably the easiest thing here. Your JSLibs are still JavaScript running in a web browser which means they follow normal conventions. As long as the external JS library you want to use is declared in a &lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt; tag before the script tag that loads your UnityInstance, it will be accessible.&lt;/p&gt;
 &lt;p&gt;(index.html)&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;script&amp;gt;
-var TestExternalJS = function(){
-    alert(&amp;quot;I&#39;m your external function!&amp;quot;);
-}
-&amp;lt;/script&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;script&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token script&quot;&gt;&lt;span class=&quot;token language-javascript&quot;&gt;
+&lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;TestExternalJS&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;I&#39;m your external function!&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;script&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;(example.jslib)&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var myLib={
-    $dependencies:{},
-    CallExternal: function(){
-        TestExternalJS();
-    }
-};
-autoAddDeps(myLib,&#39;$dependencies&#39;);
-mergInto(LibraryManager.library,myLib);
-&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; myLib&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    $dependencies&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token function-variable function&quot;&gt;CallExternal&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token function&quot;&gt;TestExternalJS&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;autoAddDeps&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;myLib&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;$dependencies&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;mergInto&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;LibraryManager&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;library&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;myLib&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;h1 id=&quot;creating-global-hooks-for-external-javascript-to-use&quot;&gt;Creating global hooks for external Javascript to use &lt;a class=&quot;direct-link&quot; href=&quot;#creating-global-hooks-for-external-javascript-to-use&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;This last part is a combination of everything we&#39;ve learned so far.  There are many ways to handle this; this is just my preferred style&lt;/p&gt;
 &lt;p&gt;We create a new script tag to hold a global object. We give the tag an id for easy access later and a &amp;quot;isLoaded&amp;quot; variable for checking.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;script id=&amp;quot;UnityHooks&amp;quot;&amp;gt;
-var UnityHooks={
-    isLoaded:false
-}
-&amp;lt;/script&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;script&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;UnityHooks&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token script&quot;&gt;&lt;span class=&quot;token language-javascript&quot;&gt;
+&lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; UnityHooks&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    isLoaded&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;script&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;In our JSLib, we add functions to our global object.  It&#39;s a good idea to marshal and cache any data you need.   We finish by setting isLoaded to true, and firing a &amp;quot;loaded&amp;quot; event on the script tag itself.  This will allow any external APIs that depend on our Unity hooks to use the standard EventListener system&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;SetUpHooks:function(callback){
-        UnityHooks.cb=callback;
-        UnityHooks.TestCallback=function(text){
-            var bufferSize = lengthBytesUTF8(text) + 1;
-            var buffer = _malloc(bufferSize);
-            stringToUTF8(text, buffer, bufferSize);
-            Runtime.dynCall(&#39;vi&#39;,UnityHooks.cb,[buffer]);
-        }
-        UnityHooks.isLoaded=true;
-        document.getElementById(&#39;UnityHooks&#39;).dispatchEvent(new Event(&#39;loaded&#39;));
-    }
-&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token function-variable function&quot;&gt;SetUpHooks&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        UnityHooks&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;cb&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;callback&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        UnityHooks&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function-variable function&quot;&gt;TestCallback&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; bufferSize &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;lengthBytesUTF8&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;text&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; buffer &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;_malloc&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;bufferSize&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;token function&quot;&gt;stringToUTF8&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;text&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; buffer&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; bufferSize&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            Runtime&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;dynCall&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;vi&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;UnityHooks&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;cb&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;buffer&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+        UnityHooks&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;isLoaded&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        document&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;UnityHooks&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;dispatchEvent&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Event&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;loaded&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;h1 id=&quot;wrapping-up&quot;&gt;Wrapping Up &lt;a class=&quot;direct-link&quot; href=&quot;#wrapping-up&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;I believe this covers the missing edge cases in the official Unity documentation. Here&#39;s a few common pitfalls I&#39;ve run across that are worth mentioning.&lt;/p&gt;
 &lt;h2 id=&quot;scope-and-closures&quot;&gt;Scope and Closures &lt;a class=&quot;direct-link&quot; href=&quot;#scope-and-closures&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
@@ -450,8 +436,7 @@ You could just use JSON to easily convert your object(s) to a string and then pa
 &lt;h2 id=&quot;using-non-static-callbacks&quot;&gt;Using non-static callbacks &lt;a class=&quot;direct-link&quot; href=&quot;#using-non-static-callbacks&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;So remember earlier when we passed a static C# callback to Javascript?  That&#39;s a bit inconvenient. What if we just used a non-static callback?&lt;br&gt;
 You&#39;ll get the this error in your Javscript console:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;NotSupportedException: IL2CPP does not support marshaling delegates that point to instance methods to native code.
-&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;NotSupportedException: IL2CPP does not support marshaling delegates that point to instance methods to native code.&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;So you must use static delegates.  However, you can create a look up table to cache these local delegates and just pass an ID value and a static delegate to the Javascript.  This is the exact same logic we used in &lt;a href=&quot;#pass-a-javascript-callback-to-c%23-(older-versions-of-emscripten)&quot;&gt;Pass a Javascript callback to C# (Older versions of Emscripten)&lt;/a&gt; except now you handle it on the C# side instead of the Javascript side.&lt;/p&gt;
 &lt;p&gt;I wrote a simple &lt;a href=&quot;https://gist.github.com/jmschrack/4d1451a0914f210cbe481bcf176891ea&quot;&gt;ActionLookUpTable gist on Github&lt;/a&gt; that will work for general Interops. It was built with multi-threading in mind, but it won&#39;t compile on WebGL unless you remove the System.Threading imports. However, multi-threading isn&#39;t an issue on WebGL so it&#39;s an easy remove.&lt;/p&gt;
 &lt;p&gt;Good luck!&lt;/p&gt;
