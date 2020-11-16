@@ -196,7 +196,7 @@ Just run &quot;Tools/Set WebGL Args&quot; once and that's it. Now you should be 
     <span class="token function">InvokeCallback</span><span class="token punctuation">(</span>cb<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
 <h2 id="on-the-javascript-side-2">On the Javascript side <a class="direct-link" href="#on-the-javascript-side-2">#</a></h2>
-<p>We're going to make use of Emscripten's &quot;__postset&quot; command, which will emit a string directly into</p>
+<p>We're going to make use of Emscripten's &quot;__postset&quot; command, which will emit a string directly into the resulting Javascript file.  In this case, we emit a scope level array to hold our JS callback references. In this simple example, we just pass the index of the callback to C#, and then use that index to invoke the callback later.</p>
 <pre class="language-js"><code class="language-js">JSCallbackExample__postset<span class="token operator">:</span><span class="token string">'var cbIDs=[];'</span><span class="token punctuation">,</span>
 <span class="token function-variable function">JSCallbackExample</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token keyword">var</span> <span class="token function-variable function">callback</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
@@ -209,6 +209,9 @@ Just run &quot;Tools/Set WebGL Args&quot; once and that's it. Now you should be 
     <span class="token keyword">var</span> callback<span class="token operator">=</span>cbIDs<span class="token punctuation">[</span>cb<span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token function">callback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
+<blockquote>
+<p>Heads Up:  This example does not remove callbacks after invoking them. If you need to use Javascript callbacks sparingly or if you reuse callbacks, this will probably be okay. However, if you need to invoke non-reusable JS callbacks frequently, this array will bloat up and waste memory. In the latter case, consider using a JS Object and generating unique keys instead.</p>
+</blockquote>
 <h1 id="call-external-javascript-on-the-web-page">Call external Javascript on the web page <a class="direct-link" href="#call-external-javascript-on-the-web-page">#</a></h1>
 <p>This is probably the easiest thing here. Your JSLibs are still JavaScript running in a web browser which means they follow normal conventions. As long as the external JS library you want to use is declared in a <code>&lt;script&gt;</code> tag before the script tag that loads your UnityInstance, it will be accessible.</p>
 <p>(index.html)</p>
