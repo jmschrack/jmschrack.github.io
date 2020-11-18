@@ -74,12 +74,17 @@ However, it's a good idea to do this so you can rapidly test changes on your loc
 <li>Open up Windows Powershell (or command prompt).</li>
 <li>run &quot;npm install -g @11ty/eleventy&quot;  (without quotes)</li>
 <li>Go to <a href="https://github.com/11ty/eleventy-base-blog">https://github.com/11ty/eleventy-base-blog</a> and choose &quot;Use This Template&quot; button. Name your repo whatever you want, or leave the default name.</li>
-<li>On your freshly created/cloned GitHub repository, create a new branch called &quot;dev&quot; (Or whatever you want, all your work will be done here.)  If you want to set this up for a specific repo instead of your &quot;User page&quot;, call the branch &quot;gh-pages&quot;, and skip to step 6.</li>
+<li>On your freshly created/cloned GitHub repository, create a new branch called &quot;dev&quot; (Or whatever you want, all your work will be done here.)</li>
+</ol>
+<blockquote>
+<p>If you want to set this up for a specific repo instead of your &quot;User page&quot;, call the branch &quot;gh-pages&quot;, and skip to step 6.</p>
+</blockquote>
+<ol start="5">
 <li>On your github repo's settings, change the default branch to &quot;dev&quot; and rename your repo to <em>username</em>.github.io</li>
 </ol>
 <h2 id="set-up-travisci-to-publish-your-github-repo">Set up TravisCI to publish your GitHub repo <a class="direct-link" href="#set-up-travisci-to-publish-your-github-repo">#</a></h2>
 <ol start="6">
-<li>Go to <a href="https://travis-ci.org/getting_started">https://travis-ci.org/getting_started</a> , sign in with github. If you're feeling lazy, just activate Travis for all repositories.</li>
+<li>Go to <a href="https://travis-ci.com/getting_started">https://travis-ci.com/getting_started</a> , sign in with github. If you're feeling lazy, just activate Travis for all repositories.</li>
 <li>On GitHub, go to your profile Settings&gt;Developer Settings&gt;Personal Access Tokens, and create a new personal access token for TravisCI with the &quot;Repo&quot; permissions. <strong>Copy the key!</strong></li>
 <li>Go to TravisCI and navigate to your repository, and go to the settings for it. Create a new EnvironmentVariable called &quot;GITHUB_TOKEN&quot;, paste the Access Token you copied in here and click &quot;Add&quot;</li>
 </ol>
@@ -87,22 +92,24 @@ However, it's a good idea to do this so you can rapidly test changes on your loc
 <ol start="9">
 <li>If you are not using the User page (i.e. you skipped step 5 above), just change the &quot;pathprefix&quot; in .travis.yml to point to your repo's name. Otherwise, edit your .travis.yml and change it to the following.:</li>
 </ol>
-<pre><code>language: node_js
-node_js:
-  - 12
-before_script:
-  - npm install @11ty/eleventy -g
-script: eleventy --pathprefix=&quot;/&quot;
-deploy:
-  local-dir: _site
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
-  keep-history: true
-  target_branch: master
-  on:
-    branch: dev
-</code></pre>
+<pre class="language-yml"><code class="language-yml"><span class="token key atrule">language</span><span class="token punctuation">:</span> node_js
+<span class="token key atrule">node_js</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token number">12</span>
+<span class="token key atrule">before_script</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> npm install @11ty/eleventy <span class="token punctuation">-</span>g
+<span class="token key atrule">script</span><span class="token punctuation">:</span> eleventy <span class="token punctuation">-</span><span class="token punctuation">-</span>pathprefix="/"
+<span class="token key atrule">deploy</span><span class="token punctuation">:</span>
+  <span class="token key atrule">local-dir</span><span class="token punctuation">:</span> _site
+  <span class="token key atrule">provider</span><span class="token punctuation">:</span> pages
+  <span class="token key atrule">skip-cleanup</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+  <span class="token key atrule">github-token</span><span class="token punctuation">:</span> $GITHUB_TOKEN  <span class="token comment"># Set in travis-ci.com dashboard, marked secure</span>
+  <span class="token key atrule">keep-history</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+  <span class="token key atrule">target_branch</span><span class="token punctuation">:</span> master
+  <span class="token key atrule">on</span><span class="token punctuation">:</span>
+    <span class="token key atrule">branch</span><span class="token punctuation">:</span> dev</code></pre>
+<blockquote>
+<p>If you are setting this up for a specific repo instead of your &quot;User page&quot;, set &quot;target_branch&quot; to &quot;gh-pages&quot;</p>
+</blockquote>
 <p>This tells TravisCI to pull from the dev branch, and deploy to the master branch.<br>
 10. Commit and push your changes now. Go back to TravisCI and watch your build begin.<br>
 11. Once Travis finishes, go to your <a href="http://GitHub.com">GitHub.com</a> repo's settings, scroll down to find the &quot;GitHub Pages&quot; section. If everything worked, you'll be given a link that points to <em>username</em>.github.io !</p>
