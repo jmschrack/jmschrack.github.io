@@ -46,7 +46,7 @@ You can download an installer for Node.js from https://nodejs.org/en/download/. 
 ```
 language: node_js
 node_js:
-  - 8
+  - 12
 before_script:
   - npm install @11ty/eleventy -g
 script: eleventy --pathprefix="/"
