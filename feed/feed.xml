@@ -207,7 +207,7 @@ However, it&#39;s a good idea to do this so you can rapidly test changes on your
 &lt;/ol&gt;
 &lt;pre&gt;&lt;code&gt;language: node_js
 node_js:
-  - 8
+  - 12
 before_script:
   - npm install @11ty/eleventy -g
 script: eleventy --pathprefix=&amp;quot;/&amp;quot;
